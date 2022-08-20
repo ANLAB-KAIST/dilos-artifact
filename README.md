@@ -21,17 +21,15 @@ reboot # 7. Reboot
 ./setup.lxc.sh # 8. Setup an LXC container
 ```
 
-## 2. Experiment Preperation
-
-### 2.1. Dataset download
+## 2. Dataset Download
 
 **WARNING: Takes long time**
 
 ```bash
-./download.dataset.sh # Download dataset in /mnt
+./download.dataset.sh # Download dataset in container's /mnt
 ```
 
-### 2.2. Build Apps for Experiment
+## 3. Build Apps for Experiment
 
 ```bash
 ./build.apps.fastswap.sh # build apps
