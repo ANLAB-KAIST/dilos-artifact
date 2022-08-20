@@ -1,0 +1,4 @@
+title: Ffmpeg
+version: 4.2
+require:
+- osv.libz

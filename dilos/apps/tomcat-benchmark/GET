@@ -1,0 +1,8 @@
+#!/bin/bash
+
+VER=osv-v1
+
+wget -c https://github.com/cloudius-systems/FrameworkBenchmarks/releases/download/${VER}/servlet.war
+mkdir -p ROOTFS/usr/tomcat/webapps/
+zip servlet.war META-INF/context.xml
+cp -av servlet.war ROOTFS/usr/tomcat/webapps

@@ -1,0 +1,10 @@
+#!/bin/sh
+set -ex
+mkdir upstream
+cd upstream
+JETTY_VERSION="9.4.19.v20190610"
+wget -c "https://repo1.maven.org/maven2/org/eclipse/jetty/jetty-distribution/${JETTY_VERSION}/jetty-distribution-${JETTY_VERSION}.tar.gz" -O jetty.tgz
+tar zxvf jetty.tgz --strip-components=1
+sed '/<!--$/d;/^ *-->$/d' demo-base/webapps/test.d/override-web.xml >/tmp/$$.xml
+mv /tmp/$$.xml demo-base/webapps/test.d/override-web.xml
+rm -f lib/setuid/libsetuid-osx.so

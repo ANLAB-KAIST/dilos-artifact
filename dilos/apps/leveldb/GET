@@ -1,0 +1,22 @@
+set -e
+VERSION=1.15.0
+TARBALL=leveldb-$VERSION.tar.gz
+SRCDIR=leveldb-$VERSION
+if [ ! -e $TARBALL ];then
+    wget https://leveldb.googlecode.com/files/$TARBALL
+fi
+rm -rf $SRCDIR leveldb
+tar zxf $TARBALL
+mv $SRCDIR leveldb
+
+cd leveldb
+patch -p1 < ../patch.diff
+make
+make db_bench
+cp -vf db_bench ../db_bench.so
+cp -vf libleveldb.so.1.15 ..
+cd ..
+
+mkdir -p ROOTFS/usr/lib
+cp libleveldb.so.1.15 /lib64/libsnappy.so.1 ROOTFS/usr/lib
+cp db_bench.so ROOTFS

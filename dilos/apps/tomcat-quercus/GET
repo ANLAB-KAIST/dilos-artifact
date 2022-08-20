@@ -1,0 +1,7 @@
+#!/bin/bash
+
+VERSION=4.0.39
+
+wget -c -O quercus.war http://caucho.com/download/quercus-${VERSION}.war
+mkdir -p ROOTFS/usr/tomcat/webapps/
+cp quercus.war ROOTFS/usr/tomcat/webapps/

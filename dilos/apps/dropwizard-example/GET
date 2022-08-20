@@ -1,0 +1,6 @@
+# Build a ... directory from the upstream dropwizard source code
+git clone https://github.com/dropwizard/dropwizard.git
+cd dropwizard
+mvn package -DskipTests=true
+cd dropwizard-example
+java -jar target/dropwizard-example-0.8.0-rc3-SNAPSHOT.jar db migrate example.yml

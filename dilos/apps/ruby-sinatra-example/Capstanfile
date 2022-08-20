@@ -1,0 +1,5 @@
+base: ruby
+
+cmdline: --cwd=/sinatra/ --env=GEM_HOME=/sinatra/gems /ruby.so ./example.rb
+
+build: make

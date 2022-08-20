@@ -1,0 +1,5 @@
+/specjvm.jar: ${MODULE_DIR}/SPECjvm2008/SPECjvm2008.jar
+/lib/**: ${MODULE_DIR}/SPECjvm2008/lib/**
+/resources/**: ${MODULE_DIR}/SPECjvm2008/resources/**
+/props/**: ${MODULE_DIR}/SPECjvm2008/props/**
+/redistributable_sources/**: ${MODULE_DIR}/SPECjvm2008/redistributable_sources/**

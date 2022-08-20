@@ -1,0 +1,5 @@
+/wasmer: ${MODULE_DIR}/install/wasmer
+/lua.wasm: ${MODULE_DIR}/upstream/lua.wasm
+/sqlite.wasm: ${MODULE_DIR}/upstream/sqlite.wasm
+/nginx/**: ${MODULE_DIR}/nginx/**
+/nginx/nginx.wasm: ${MODULE_DIR}/upstream/nginx.wasm

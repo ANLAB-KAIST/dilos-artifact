@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>OSv : vm23_39382ds</title>
+    <link href="/dashboard_static/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon" />
+    <link href="/dashboard_static/library/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/dashboard_static/styles/style.css" rel="stylesheet">
+    <link href="/dashboard_static/styles/jquery.jqplot.css" rel="stylesheet">
+    <link href="/dashboard_static/styles/font-awesome.min.css" rel="stylesheet">
+    <script type="text/javascript" src="/dashboard_static/lib.js"></script>
+    <script type="text/javascript" src="/dashboard_static/cajon.js"></script>
+    <script type="text/javascript" src="/dashboard_static/out.js"></script>
+    <script type="text/javascript" src="/dashboard_static/smoothie.js"></script>
+    <script src="/dashboard_static/library/bootstrap/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="osv_header">
+    <div class="logo" >
+        <a href="/"><img src="/dashboard_static/images/logo_osv.png"></a>
+        <a style="position: absolute; left: 73px;" href="http://cloudius-systems.com/"><img src="/dashboard_static/images/logo_cloudius.png"></a>
+    </div>
+    <div class="vmname" data-hostname></div>
+    <div data-global-pause class="system_run_icon"></div>
+
+    <!-- <div class="playPause" style="float:right; color:white; position:relative; left: -10px; top: -10px">
+        <span data-global-play>Play</span>
+        <span data-global-pause>Pause</span>
+    </div> -->
+</div>
+
+<div id="main" style="height: 100%">
+    
+    <div class="sidebarOsv">
+        <ul class="nav nav-tabs" id="leftNavOsv">
+            <li class="active" data-dashboard-link> <a class="icn_dashboard" href="/dashboard">&nbsp;</a></li>
+            <li><a class="icn_rest" href="/dashboard/swagger">&nbsp;</a></li>
+        </ul>
+    </div>
+
+
+
+
+
+    <div class="container-fluid">
+        <div class="main row">
+                <ul class="nav nav-tabs main_tabsholder" role="tablist">
+                    <li><a href="/dashboard/">Main</a></li>
+                    <li><a href="/dashboard/threads/">Threads</a></li>
+                    <li><a href="/dashboard/traces/">Traces</a></li>
+                    <li class="hidden"><a href="/dashboard/jvm/">JVM</a></li>
+                    <li class="hidden"><a href="/dashboard/cassandra/">Cassandra</a></li>
+                    <li class="hidden"><a href="/dashboard/tomcat/">Tomcat</a></li>
+                </ul>
+        </div>
+    </div>
+
+    <div class="container" id="swagger">

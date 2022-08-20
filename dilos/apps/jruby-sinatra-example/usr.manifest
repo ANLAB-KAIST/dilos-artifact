@@ -1,0 +1,4 @@
+/jruby-complete.jar: ${MODULE_DIR}/jruby-complete.jar
+/jruby-extensions.jar: ${MODULE_DIR}/jruby-extensions.jar
+/example.rb: ${MODULE_DIR}/example.rb
+

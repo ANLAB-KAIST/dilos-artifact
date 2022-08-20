@@ -1,0 +1,6 @@
+A demo of how to use the "node" module providing node.js.
+
+The demo opens a Web server on port 3000, printing a silly "Hello World" message.
+
+To build this demo, you need "npm" to be installed on your host (e.g.,
+on Fedora, just do "yum install npm").

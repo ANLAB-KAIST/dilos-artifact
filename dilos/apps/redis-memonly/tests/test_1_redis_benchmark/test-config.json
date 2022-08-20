@@ -1,0 +1,9 @@
+{
+  "tester" : {
+     "redis" : {
+        "requests" : "100000",
+        "clients" : "1 50",
+        "pipelines": "1 16"
+     }
+  }
+}

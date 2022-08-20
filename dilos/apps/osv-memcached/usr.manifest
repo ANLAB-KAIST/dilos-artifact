@@ -1,0 +1,1 @@
+/tools/osv-memcached.so: ${MODULE_DIR}/osv-memcached/osv-memcached.so

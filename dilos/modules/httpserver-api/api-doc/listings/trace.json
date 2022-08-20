@@ -1,0 +1,298 @@
+{
+    "apiVersion": "0.0.1",
+    "swaggerVersion": "1.2",
+    "basePath": "{{Protocol}}://{{Host}}",
+    "resourcePath": "/trace",
+    "produces": [
+        "application/json"
+    ],
+    "apis": [
+        {
+            "path": "/trace/status",
+            "operations": [
+                {
+                    "method": "GET",
+                    "summary": "All/matching trace event status",
+                    "notes": "return info and status of the matching trace events",
+                    "type": "array",
+                    "items":{"type":"TraceEventInfo"},
+                    "nickname": "getTraceEventStatus",
+                    "produces": [
+                        "application/json"
+                    ],
+                    "parameters": [
+                        {
+                            "name": "match",
+                            "description": "Match regular expression to match event ids against",
+                            "required": false,
+                            "allowMultiple": false,
+                            "type": "string",
+                            "paramType": "query"
+                        }
+                    ],
+                    "deprecated": "false"
+                },
+                {
+                    "method": "POST",
+                    "summary": "Change all/matching trace event status",
+                    "notes": "Modify status for matching events and return previous state",
+                    "type": "array",
+                    "items":{"type":"TraceEventInfo"},
+                    "nickname": "setTraceEventStatus",
+                    "produces": [
+                        "application/json"
+                    ],
+                    "parameters": [
+                        {
+                            "name": "match",
+                            "description": "Match regular expression to match event ids against",
+                            "required": false,
+                            "allowMultiple": false,
+                            "type": "string",
+                            "paramType": "query"
+                        },
+                        {
+                            "name": "enabled",
+                            "description": "Event enabled",
+                            "required": true,
+                            "allowMultiple": false,
+                            "type": "boolean",
+                            "paramType": "query"
+                        },
+                        {
+                            "name": "backtrace",
+                            "description": "Event generates backtrace",
+                            "required": false,
+                            "allowMultiple": false,
+                            "type": "boolean",
+                            "paramType": "query"
+                        }
+                    ],
+                    "deprecated": "false"
+                }
+            ]
+        },
+        {
+            "path": "/trace/event/{eventid}",
+            "operations": [
+                {
+                    "method": "GET",
+                    "summary": "Trace event info",
+                    "notes": "return the trace event state info",
+                    "type": "TraceEventInfo",
+                    "nickname": "getSingleTraceEventStatus",
+                    "produces": [
+                        "application/json"
+                    ],
+                    "parameters": [
+                        {
+                            "name": "eventid",
+                            "description": "Event ID to query",
+                            "required": true,
+                            "allowMultiple": true,
+                            "type": "string",
+                            "paramType": "path"
+                        }
+                    ],
+                    "deprecated": "false"
+                },
+                {
+                    "method": "POST",
+                    "summary": "Set trace event status",
+                    "notes": "Update the trace event settings and return previous state",
+                    "type": "TraceEventInfo",
+                    "nickname": "setSingleTraceEventStatus",
+                    "produces": [
+                        "application/json"
+                    ],
+                    "parameters": [
+                        {
+                            "name": "eventid",
+                            "description": "Event ID to modify",
+                            "required": true,
+                            "allowMultiple": true,
+                            "type": "string",
+                            "paramType": "path"
+                        },
+                        {
+                            "name": "enabled",
+                            "description": "Event enabled",
+                            "required": true,
+                            "allowMultiple": false,
+                            "type": "boolean",
+                            "paramType": "query"
+                        },
+                        {
+                            "name": "backtrace",
+                            "description": "Event generates backtrace",
+                            "required": false,
+                            "allowMultiple": false,
+                            "type": "boolean",
+                            "paramType": "query"
+                        }
+                    ],
+                    "deprecated": "false"
+                }
+            ]
+        },
+        {
+            "path": "/trace/count/{eventid}",
+            "operations": [
+                {
+                    "method": "POST",
+                    "summary": "Enable or disable event counting",
+                    "notes": "Enable or disable counting of a particular tracepoint",
+                    "type": "void",
+                    "nickname": "setCountEvent",
+                    "produces": [
+                        "application/json"
+                    ],
+                    "parameters": [
+                        {
+                            "name": "eventid",
+                            "description": "Event ID to modify",
+                            "required": true,
+                            "allowMultiple": true,
+                            "type": "string",
+                            "paramType": "path"
+                        },
+                        {
+                            "name": "enabled",
+                            "description": "Counting enabled",
+                            "required": true,
+                            "allowMultiple": false,
+                            "type": "boolean",
+                            "paramType": "query"
+                        }
+                    ],
+                    "deprecated": "false"
+                }
+            ]
+        },
+        {
+            "path": "/trace/count",
+            "operations": [
+                {
+                    "method": "GET",
+                    "summary": "Get enabled counts",
+                    "notes": "Returned the counters for all previously-enabled tracepoint counters",
+                    "type": "TraceCounts",
+                    "nickname": "getCounts",
+                    "produces": [
+                        "application/json"
+                    ],
+                    "parameters": [
+                    ],
+                    "deprecated": "false"
+                },
+                {
+                    "method": "DELETE",
+                    "summary": "Delete enabled counts",
+                    "notes": "Disable all enabled tracepoint counting",
+                    "type": "void",
+                    "nickname": "deleteCounts",
+                    "produces": [
+                        "application/json"
+                    ],
+                    "parameters": [
+                    ],
+                    "deprecated": "false"
+                }
+            ]
+        },
+        {
+            "path": "/trace/sampler",
+            "operations": [
+                {
+                    "method": "POST",
+                    "summary": "Control sampling profiler",
+                    "type": "string",
+                    "nickname": "setSamplerState",
+                    "produces": [
+                        "application/json"
+                    ],
+                    "parameters": [
+                        {
+                            "name": "freq",
+                            "description": "Frequency of sampling. Zero disables sampling.",
+                            "required": true,
+                            "allowMultiple": false,
+                            "type": "integer",
+                            "paramType": "query"
+                        }
+                    ],
+                    "deprecated": "false"
+                }
+            ]
+        },
+        {
+            "path": "/trace/buffers",
+            "operations": [
+                {
+                    "method": "GET",
+                    "summary": "Retrieve the trace buffer contents and associated meta data",
+                    "notes": "returns binary file in the OSv trace dump format",
+                    "type": "string",
+                    "nickname": "getTraceBuffers",
+                    "produces": [
+                        "application/octect-stream"
+                    ],
+                    "deprecated": "false"
+                }
+            ]
+        }
+    ],
+    "models" : {
+        "TraceEventInfo" : {
+            "id": "TraceEventInfo",
+            "description" : "trace event info",
+            "properties": {
+                "name":  {
+                    "type": "string",
+                    "description": "event name"
+                },
+                "id": {
+                    "type": "string",
+                    "description": "trace event id"
+                },
+                "enabled": {
+                    "type": "boolean",
+                    "description": "event enabled"
+                },
+                "backtrace": {
+                    "type": "boolean",
+                    "description": "generate backtrace when sampled"
+                }
+            }
+        },
+        "TraceCount" : {
+            "id": "TraceCount",
+            "description" : "Number of times event seen since count enabled",
+            "properties": {
+                "name":  {
+                    "type": "string",
+                    "description": "event name"
+                },
+                "count": {
+                    "type": "long",
+                    "description": "count"
+                }
+            }
+        },
+        "TraceCounts": {
+               "id": "TraceCounts",
+               "description": "Counts of all counted events",
+               "properties": {
+                "list": {
+                    "type": "array",
+                    "items": {"type": "TraceCount"},
+                    "description": "List of counted events"
+                },
+                "time_ms": {
+                    "type": "long",
+                    "description": "Time when counts were taken (milliseconds since boot)"
+                }
+            }
+        }
+    }
+}

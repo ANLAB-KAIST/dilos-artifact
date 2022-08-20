@@ -1,0 +1,5 @@
+base: ruby
+
+cmdline: --cwd=/osv_test/ /ruby.so ./bin/rails server
+
+build: make

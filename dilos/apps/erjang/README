@@ -1,0 +1,29 @@
+A JVM-based Erlang VM:
+
+http://www.erjang.org
+https://github.com/trifork/erjang
+
+How to run:
+
+$ cd .../osv-apps/erjang
+
+$ capstan build
+Building erjang...
+Downloading cloudius/osv-openjdk/index.yaml...
+149 B / 149 B [=========================================================================================] 100.00 % 
+Downloading cloudius/osv-openjdk/osv-openjdk.qemu.gz...
+60.80 MB / 60.80 MB [===================================================================================] 100.00 % 
+
+$ capstan run
+Created instance: erjang
+OSv v0.09
+eth0: 192.168.122.15
+** Erjang R16B01 **  [root:/~resource] [erts:5.10.2] [smp S:1 A:10] [java:1.7.0_51] [unicode]
+Eshell V5.10.2  (abort with ^G)
+1> lists:reverse("Hello, World!").
+"!dlroW ,olleH"
+2> 
+
+^C
+$
+

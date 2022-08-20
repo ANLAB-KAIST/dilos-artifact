@@ -1,0 +1,9 @@
+This module is similar to ../ImageMagick, except that instead of taking
+the pre-compiled ImageMagick libraries from the build machine and only
+compiling convert.c, here we fetch the ImageMagick source code and compile
+it especially for OSv.
+
+We compile "convert" as a PIE (trying to compile it as a shared object was
+very difficult because of the convoluted buildtools layers used to build
+ImageMagick), and we disable OpenMP in the build because of the yet-unfixed
+problems in using it in OSv (see OSv issue #590).

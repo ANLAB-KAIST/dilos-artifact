@@ -1,0 +1,4 @@
+base: cloudius/osv-node
+
+cmdline: --cwd=/chat-example/ /libnode.so ./index.js
+build: make

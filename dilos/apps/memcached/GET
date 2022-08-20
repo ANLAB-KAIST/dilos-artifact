@@ -1,0 +1,35 @@
+# Build an src/ directory from the upstream memcached.
+set -e
+VERSION=1.4.21
+
+mkdir upstream || :
+cd upstream
+wget -c http://www.memcached.org/files/memcached-$VERSION.tar.gz
+tar zxvf memcached-$VERSION.tar.gz
+cd memcached-$VERSION
+./configure
+
+cd ../..
+
+mkdir src
+for i in \
+	assoc.c config.h items.c protocol_binary.h stats.c util.c \
+	assoc.h daemon.c items.h sasl_defs.h stats.h util.h \
+	cache.c hash.c memcached.c slabs.c thread.c \
+        cache.h hash.h memcached.h slabs.h trace.h \
+	jenkins_hash.h jenkins_hash.c murmur3_hash.h murmur3_hash.c
+do
+	cp upstream/memcached-$VERSION/$i src/$i
+done
+
+cd src
+
+patch -N -p1 < ../patch || true
+
+# Disable various options turned on by "configure" above (if they are
+# indeed turned on), but which we do not want in any case.
+mv config.h config.h.orig
+sed '/HAVE_SASL_/d' < config.h.orig > config.h
+
+cd ..
+rm -r upstream

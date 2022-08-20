@@ -1,0 +1,7 @@
+BasedOnStyle: Google
+IndentWidth: 4
+Language: Cpp
+DerivePointerAlignment: false
+PointerAlignment: Right
+SortIncludes: true
+FixNamespaceComments: true

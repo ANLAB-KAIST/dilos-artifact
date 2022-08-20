@@ -1,0 +1,7 @@
+base: cloudius/osv-openjdk
+
+cmdline: >
+  /java.so
+  -jar start.jar
+
+build: make

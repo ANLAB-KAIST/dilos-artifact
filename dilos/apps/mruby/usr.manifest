@@ -1,0 +1,2 @@
+/tools/mruby.so: ${MODULE_DIR}/mruby.so
+/tools/mirb.so: ${MODULE_DIR}/mirb.so

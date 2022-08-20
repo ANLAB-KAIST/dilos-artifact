@@ -1,0 +1,8 @@
+This is an example of running Jetty on OSv.
+
+The default command line (set in module.py) runs Jetty's demo app,
+which listens on port 8080 and provides all sorts of silly examples and
+tests. Clearly, a real user of jetty will want to run a different
+servlet, and might not need all the stuff we put (see usr.manifest)
+in the image - which currently includes the demo, a gazillion libraries,
+etc.

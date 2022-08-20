@@ -1,0 +1,49 @@
+
+All the files under the following directories are imported from musl:
+
+  arch
+  ctype
+  env
+  errno
+  exit
+  internal
+  locale
+  math
+  misc
+  multibyte
+  network
+  passwd
+  prng
+  process
+  setjmp
+  signal
+  stdio
+  stdlib
+  string
+  temp
+  time
+  unistd
+
+With the following exceptions:
+
+1) written locally largely based on musl code:
+
+  locale/strtod_l.c
+  locale/strtof_l.c
+  locale/strtold_l.c
+  locale/wcsftime_l.c
+  stdio/__fprintf_chk.c
+  stdio/__vfprintf_chk.c
+  string/__memcpy_chk.c
+  string/rawmemchr.c
+
+2) imported from FreeBSD:
+
+  misc/realpath.c
+
+
+All imports are from musl.git commit 2c074b0d6cb2b28c5d1c0ccb2809965f4676efeb
+and have various local modification to deal with OSv specifics or our
+strict compiler warnings.
+
+All other files are native to OSv and written by Cloudius systems.

@@ -1,0 +1,23 @@
+--- src/assoc.c	2013-11-18 13:00:26.080026394 +0200
++++ src-save/assoc.c	2013-07-03 11:27:41.113465014 +0300
+@@ -203,6 +203,7 @@
+ 
+ static void *assoc_maintenance_thread(void *arg) {
+ 
++    slabs_rebalancer_pause(); // Added by NYH - see memcached issue #331
+     while (do_run_maintenance_thread) {
+         int ii = 0;
+
+
+--- src/memcached.c	2013-11-18 13:04:54.087316443 +0200
++++ src-save/memcached.c	2013-06-30 12:05:09.286145086 +0300
+@@ -4732,6 +4732,8 @@
+         NULL
+     };
+ 
++    printf("Memcached for OSV, based on Memcached %s\n", VERSION);
++
+     if (!sanitycheck()) {
+         return EX_OSERR;
+     }
+

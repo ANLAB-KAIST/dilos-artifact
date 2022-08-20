@@ -1,0 +1,22 @@
+base: perl-base
+
+#
+#this will create interactive session with debugger, but we are not getting
+#the debugger prompt or commands, and input is echoed twice.
+#
+#It will, however, execute perl statements interactively.
+#try:
+#    printf "(%s)\n", join(',', keys %ENV);
+#    printf "(%s)\n", join(',', values %ENV);
+#    exit;
+#    exit;
+#I.e., type "exit;" twice to end session.  RT 8/6/15
+#Use -W to show all warnings.
+#cmdline: /osv/bin/perl -W -de 1
+cmdline: /osv/bin/perl -de 1
+
+#note - tried this but it hangs because cannot send EOF:
+#cmdline: /osv/bin/perl
+
+build: true
+

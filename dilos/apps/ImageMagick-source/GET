@@ -1,0 +1,32 @@
+#!/bin/sh
+
+set -e
+
+BASEDIR=$PWD
+BUILDDIR=$BASEDIR/build
+ROOTDIR=$BASEDIR/install
+
+if [ ! -f ImageMagick.tar.gz ]; then
+	wget http://www.imagemagick.org/download/ImageMagick.tar.gz
+	tar zxf ImageMagick.tar.gz
+fi
+
+SRCDIR=`echo $BASEDIR/ImageMagick-*`
+
+mkdir -p $BUILDDIR
+
+cd $BUILDDIR
+CFLAGS="-fpie" CXXFLAGS="-fpie" CPPFLAGS=-fpie LDFLAGS=-pie $SRCDIR/configure --disable-openmp --enable-shared --prefix=$ROOTDIR --srcdir=$SRCDIR
+make
+make install
+
+cd $BASEDIR
+
+find . -name "*.so" |  xargs -I {} ldd {} | grep -Po '(?<=> )/[^ ]+' | sort | uniq | grep -Pv 'lib(c|dl|m|util|rt|pthread|Magick.*).so' | xargs -I {} install  {} install/lib
+
+echo "
+/usr/etc/**:${ROOTDIR}/etc/**
+/usr/share/**:${ROOTDIR}/share/**
+/usr/lib/**:${ROOTDIR}/lib/**
+/usr/bin/convert:${ROOTDIR}/bin/convert
+" > usr.manifest

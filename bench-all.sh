@@ -1,0 +1,9 @@
+#!/bin/bash
+./scripts/bench-seq.sh
+./scripts/bench-quicksort.sh
+./scripts/bench-kmeans.sh
+./scripts/bench-snappy.sh
+./scripts/bench-gapbs.sh
+./scripts/bench-dataframe.sh
+./scripts/bench-dataframe-delayed.sh
+./scripts/bench-redis.sh

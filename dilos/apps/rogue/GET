@@ -1,0 +1,46 @@
+#!/bin/sh
+set -ev
+mkdir upstream
+cd upstream
+
+# Lose any inherited make flags
+unset MAKEFLAGS
+unset MFLAGS
+unset MAKE
+
+# Get and compile ncurses
+wget -c http://ftp.gnu.org/pub/gnu/ncurses/ncurses-5.9.tar.gz
+tar zxvf ncurses-5.9.tar.gz
+cd ncurses-5.9
+patch -p2 < ../../ncurses.patch
+patch -p1 < ../../ncurses-5.9-gcc-5.patch
+# TODO: Without the "--disable-tcap-names", ncurses/tinfo/read_entry.c
+# fails to read the extended part (#if XNAMES). Try to think why. Is this
+# an OSv specific bug? But for now, rogue works fine if we just don't support
+# these extended entries.
+CFLAGS="-fPIC -O2" ./configure --prefix=/usr --without-debug --without-tests --without-shared --without-cxx-binding --without-ada --disable-tcap-names
+make
+cd ..
+
+# Get and compile Rogue
+#wget http://rogue.rogueforge.net/files/rogue5.4/rogue5.4.4-src.tar.gz
+#tar zxvf rogue5.4.4-src.tar.gz
+wget -c https://github.com/phs/rogue/archive/master.tar.gz
+tar zxvf master.tar.gz
+ln -s rogue-master rogue5.4.4
+
+cd rogue5.4.4
+CFLAGS="-fPIC -O2 -I../ncurses-5.9/include" ./configure --prefix=/usr
+cat >> Makefile << END
+LDFLAGS=-pie
+LIBS=../ncurses-5.9/lib/libncurses.a
+END
+make
+strip rogue
+cd ..
+
+# Build a fixed terminfo, which doesn't use linefeed to go down, but rather
+# uses the down escape sequence - because Qemu screws up ^J and replaces it
+# with ^J^M...
+infocmp xterm | sed 's/cud1=\(^J\|\\n\),/cud1=\\E[B,/; s/ind=\(^J\|\\n\),/ind=\\E[S,/; s/xterm/unknown/' >terminfo.tmp
+ncurses-5.9/progs/tic -o fixed-terminfo terminfo.tmp

@@ -1,0 +1,17 @@
+This new HTML5 app is implemented in Typescript and served by OSv httpserver
+same way as OSv gui. It provides command line terminal functionality in your
+favorite webbrowser and the supported set of commands is identical to the one
+supported by OSv cli module. The app depends on httpserver-cli OSv module
+and external project https://github.com/wkozaczuk/osv-html5-terminal.git.
+
+You can build and run it a standalone:
+./scripts/build image=httpserver-html5-cli.fg
+
+Or add it to you favorite app:
+./scripts/build image=elasticsearch,httpserver-html5-cli
+
+You can open it in a browser by typing this URL:
+http://localhost:8000/cli/
+
+(when running with scripts/run.py --api; Or replace "localhost" with the VM's
+address)

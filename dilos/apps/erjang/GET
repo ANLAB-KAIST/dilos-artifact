@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+ERJANG_JAR_URL=https://dl.dropboxusercontent.com/u/1360473/erjang-R16B01.jar
+ERJANG_JAR=erjang.jar
+
+if [ ! -e $ERJANG_JAR ];then
+	wget $ERJANG_JAR_URL -O $ERJANG_JAR
+fi
+
+exit 0

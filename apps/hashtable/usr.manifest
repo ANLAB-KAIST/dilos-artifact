@@ -1,0 +1,4 @@
+/quicksort: /root/dilos/apps/microbench/build/quicksort
+/seq-multithread: /root/dilos/apps/microbench/build/seq-multithread
+/seq: /root/dilos/apps/microbench/build/seq
+/sg: /root/dilos/apps/microbench/build/sg

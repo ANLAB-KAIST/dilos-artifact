@@ -1,0 +1,2 @@
+/compress: ${MODULE_DIR}/build/compress
+/decompress: ${MODULE_DIR}/build/decompress

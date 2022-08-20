@@ -1,0 +1,30 @@
+This module builds a mostly-unmodified Memcached v1.4.17 from
+http://memcached.org/. The only modification is a one-line fix to this bug:
+https://code.google.com/p/memcached/issues/detail?id=331
+
+Compiling memcached requires libevent and its header files. On Fedora,
+for example, this requires the "libevent-devel" package package.
+
+Running Memcached:
+
+This module include a default command line, but it should *NOT* be used,
+except perhaps for sanity-checking purposes. The problem is that Memcached
+defaults to 4 worker threads and a tiny cache of 64 MB (!), which make
+little sense on most setups. Rather, the "-t" and "-m" options should be
+passed to memcached to control the number of threads and the size of the
+cache, respectively. Normally, to "-t" one should pass the number of
+CPUs on the VM, and to "-m" one should pass a size slightly lower than
+the memory of the VM.
+
+For example, this is a reasonable invocation of OSv with memcached:
+
+	make image=memached
+	sudo scripts/run.py -m6G -c1 -nv -e \
+	     "memcached.so -u root -t1 -m5000"
+
+Note how we created a VM with 1 vCPU ("-c1"), so we passed "-t1" to
+memcached to have it use one thread; Our VM has 6 GB of memory, so we
+passed "-m5000" to make memcached's in-memory cached 5000 MB in size.
+
+The "-u root" option to memcached is needed because otherwise memcached
+complains that it is run in the root user.

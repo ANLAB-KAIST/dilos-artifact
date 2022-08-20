@@ -1,0 +1,14 @@
+How to test dropwizard example:
+
+Build 
+$ make image=dropwizard-example
+
+Run the server
+$ sudo scripts/run.py -nv
+or
+$ cd apps/dropwizard-example/
+$ capstan run -n bridge
+
+Test the server
+$ ab -n 100000 -c 10 -k http://192.168.122.194:8080/hello-world
+[use the proper OSv IP]

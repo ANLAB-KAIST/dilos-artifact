@@ -1,0 +1,5 @@
+usr.manifest
+*.tar.gz
+build
+groonga-*
+install

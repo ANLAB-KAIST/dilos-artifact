@@ -1,0 +1,65 @@
+<table class="roundedContainer smallGraph table MBeansAttributes">
+  <thead>
+    <th>Key</th>
+    <th>Value</th>
+  </thead>
+  <tbody>
+  {{#each this}}
+  <tr>
+    <td>{{key}}</td>
+    <td>
+      {{#if isList}}
+        <ul>
+        {{#each value}}
+          <li>{{this}}</li>
+        {{/each}}
+        </ul>
+      {{/if}}
+      {{#if tabular}}
+        <table class="table">
+          <thead>
+            <th>Key</th>
+            <th>Value</th>
+          </thead>
+          <tbody>
+          {{#each value}}
+            <tr>
+              <td>{{@key}}</td>
+              <td>{{this}}</td>
+            </tr>
+          {{/each}}
+          </tbody>
+        </table>
+      {{/if}}
+      {{#if tabularSildes}}
+        <div class="tabluarDataControllers">
+         <i class="fa fa-arrow-left previous"></i> 
+         <span class="slideNum">1</span>/ <span class="total">{{value.length}}</span>
+         <i class="fa fa-arrow-right next"></i>
+        </div>
+        {{#each value}}
+
+        <table class="table tabular {{#if @first}}{{else}}hidden{{/if}}" data-idx="{{@index}}">
+          <thead>
+            <th>Key</th>
+            <th>Value</th>
+          </thead>
+          <tbody>
+          {{#each this}}
+            <tr>
+              <td>{{@key}}</td>
+              <td>{{this}}</td>
+            </tr>
+          {{/each}}
+          </tbody>
+        </table>
+        {{/each}}
+      {{/if}}
+      {{#if isString}}
+        {{value}}
+      {{/if}}
+    </td>
+  </tr>
+  {{/each}}
+  </tbody>
+</table>

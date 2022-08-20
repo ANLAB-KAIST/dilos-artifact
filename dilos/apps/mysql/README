@@ -1,0 +1,12 @@
+### prerequisites
+
+```sudo yum install cmake```
+
+### build
+from osv root dir
+
+```make -j 4 image=mysql56```
+
+### run
+
+```sudo scripts/run.py -nv```

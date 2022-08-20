@@ -1,0 +1,10 @@
+		</div>
+    </div>
+</div>
+</body>
+<script type="text/javascript">
+  require(['App'], function (App) {
+    App.start()
+  });
+</script>
+</html>

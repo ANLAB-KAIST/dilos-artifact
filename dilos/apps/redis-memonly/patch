@@ -1,0 +1,15 @@
+--- src/config.h	2014-10-09 12:06:02.000000000 +0300
++++ /tmp/config.h	2014-12-25 10:16:27.400712871 +0200
+@@ -119,6 +119,13 @@
+ void setproctitle(const char *fmt, ...);
+ #endif
+ 
++/* Redis's implementation of setproctitle() makes Linux-specific assumptions
++ * on the layout of argv and environ, which don't hold on OSv. Anyway, there
++ * is no need for this function on a one-process system like OSv.
++ */
++#undef USE_SETPROCTITLE
++#undef INIT_SETPROCTITLE_REPLACEMENT
++
+ /* Byte ordering detection */
+ #include <sys/types.h> /* This will likely define BYTE_ORDER */

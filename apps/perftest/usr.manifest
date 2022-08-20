@@ -1,0 +1,8 @@
+/ibv_devices: ${MODULE_DIR}/../../build/rdma-core/bin/ibv_devices
+/ibv_devinfo: ${MODULE_DIR}/../../build/rdma-core/bin/ibv_devinfo
+/ib_read_bw: ${MODULE_DIR}/build/ib_read_bw
+/ib_read_lat: ${MODULE_DIR}/build/ib_read_lat
+/ib_send_bw: ${MODULE_DIR}/build/ib_send_bw
+/ib_send_lat: ${MODULE_DIR}/build/ib_send_lat
+/ib_write_bw: ${MODULE_DIR}/build/ib_write_bw
+/ib_write_lat: ${MODULE_DIR}/build/ib_write_lat

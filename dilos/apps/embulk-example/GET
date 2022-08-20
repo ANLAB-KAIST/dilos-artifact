@@ -1,0 +1,12 @@
+#!/bin/sh
+VERSION=0.6.17
+
+rm -rf ROOTFS
+mkdir -p ROOTFS
+cd ROOTFS
+wget --no-iri https://bintray.com/artifact/download/embulk/maven/embulk-${VERSION}.jar -O embulk.jar
+java -jar embulk.jar example ./try1
+mv try1/example.yml try1/example.yml.orig
+sed -e 's/^.*path_prefix.*$/  path_prefix: ".\/try1\/csv\/sample_"/g' try1/example.yml.orig > try1/example.yml
+java -jar embulk.jar guess ./try1/example.yml -o config.yml
+cd -

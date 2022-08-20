@@ -1,0 +1,2 @@
+/wrk: ${MODULE_DIR}/wrk/wrk.so
+/usr/lib/libluajit-5.1.so.2: ${MODULE_DIR}/wrk/deps/luajit/src/libluajit.so

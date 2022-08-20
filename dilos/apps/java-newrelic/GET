@@ -1,0 +1,6 @@
+# Build a ... directory from the upstream cassandra.
+set -e
+VERSION=3.10.0
+
+wget -c http://download.newrelic.com/newrelic/java-agent/newrelic-agent/$VERSION/newrelic-agent-$VERSION.jar -O newrelic.jar
+wget -c http://download.newrelic.com/newrelic/java-agent/newrelic-agent/$VERSION/newrelic.yml

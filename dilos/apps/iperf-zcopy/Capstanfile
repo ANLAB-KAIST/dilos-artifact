@@ -1,0 +1,5 @@
+base: cloudius/osv-base
+cmdline: /iperf-zcopy -s
+build: make
+files:
+    /iperf-zcopy: iperf

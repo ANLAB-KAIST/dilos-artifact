@@ -1,0 +1,1 @@
+/etc/httpserver.conf: ${MODULE_DIR}/httpserver.conf

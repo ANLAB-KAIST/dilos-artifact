@@ -1,0 +1,13 @@
+#!/bin/sh
+
+set -e
+VERSION=4.8.1
+SRC_DIR=solr-$VERSION
+TARBALL=$SRC_DIR.tgz
+
+wget -c http://archive.apache.org/dist/lucene/solr/$VERSION/$TARBALL
+rm -rf $SRC_DIR ROOTFS
+tar zxf $TARBALL
+
+mkdir -p ROOTFS
+mv $SRC_DIR/example/* ROOTFS

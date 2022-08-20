@@ -1,0 +1,15 @@
+This is an example of simple HTTP server implemented in Rust using futures. The code is
+based on the example found here - https://hyper.rs/guides/server/hello-world/.
+The app listens on port 3000.
+
+In order to build the app you need to install Rust tool chain (compiler + cargo)
+by following instructions here: https://www.rust-lang.org/en-US/install.html.
+
+./scripts/build image=rust-httpserver
+./scripts/run.py --forward tcp:3000::3000
+
+You can open it in a browser by typing this URL:
+http://localhost:8000/cli/
+
+or hit from command line using curl:
+curl http://localhost:3000/

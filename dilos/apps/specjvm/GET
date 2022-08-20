@@ -1,0 +1,2 @@
+wget ftp://ftp.spec.org/dist/osg/java/SPECjvm2008_1_01_setup.jar
+java -jar SPECjvm2008_1_01_setup.jar -DUSER_INSTALL_DIR=SPECjvm2008 -i silent

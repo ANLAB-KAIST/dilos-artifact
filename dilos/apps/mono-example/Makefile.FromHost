@@ -1,0 +1,18 @@
+.PHONY: module
+module: usr.manifest
+
+SRC = $(shell readlink -f ../..)
+mono_exe_path = $(shell realpath $$(which mono)) 
+
+ROOTFS/hello.exe: hello.cs
+	mkdir -p ROOTFS
+	csc hello.cs /out:ROOTFS/hello.exe
+
+usr.manifest: ROOTFS/hello.exe
+	echo '/**: $${MODULE_DIR}/ROOTFS/**' > usr.manifest
+	echo "/usr/lib/mono/4.5/mscorlib.dll: /usr/lib/mono/4.5/mscorlib.dll" >> usr.manifest
+	$(SRC)/scripts/manifest_from_host.sh $(mono_exe_path) >> usr.manifest
+	$(SRC)/scripts/manifest_from_host.sh -l libmonosgen-2.0.so.1 >> usr.manifest
+
+clean:
+	rm -rf ROOTFS usr.manifest

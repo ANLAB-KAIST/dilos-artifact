@@ -1,0 +1,27 @@
+Erlang running on OSv. still a work in progress.
+
+build image with Capstan
+
+$ make
+$ capstan build -v
+$ capstan run
+
+
+erlexec wrapper
+
+usage: /usr/lib64/erlang.so [-env NAME VALUE] ARGS_FILE FALLBACK_ARGS_FILE
+
+is equivalent to
+
+$ export NAME=VALUE
+$ rm /etc/beam.args
+$ mv ARGS_FILE /etc/beam.args
+$ ln FALLBACK_ARGS_FILE /etc/beam.args
+$ erlexec -args_file /etc/beam.args
+
+ARGS_FILE: path to args_file provided by cloud-init.
+
+FALLBACK_ARGS_FILE: path to args_file existed in the image.
+
+some environment variables, e.g. HOME, must be set before running
+erlexec. you may set them with -env option.

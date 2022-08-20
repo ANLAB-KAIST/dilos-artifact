@@ -1,0 +1,5 @@
+title: SPECjvm2008
+version: 1.0.1
+require:
+- osv.openjdk8-from-host
+- osv.libz

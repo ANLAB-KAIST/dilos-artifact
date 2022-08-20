@@ -1,0 +1,40 @@
+--- 1/iperf-2.0.5/src/Client.cpp	2010-04-02 05:23:17.000000000 +0900
++++ iperf-2.0.5/src/Client.cpp	2014-10-04 04:51:52.275560198 +0900
+@@ -60,6 +60,8 @@
+ #include "delay.hpp"
+ #include "util.h"
+ #include "Locale.h"
++#include "../../../../include/osv/zcopy.h"
++#include <poll.h>
+
+ /* -------------------------------------------------------------------
+  * Store server hostname, optionally local hostname, and socket info.
+@@ -156,12 +158,27 @@
+             canRead = true;
+
+         // perform write
+-        currLen = write( mSettings->mSock, mBuf, mSettings->mBufLen );
++        struct zmsghdr zm = {};
++        struct iovec iov[1];
++        struct pollfd pfd[1];
++        iov[0].iov_base = mBuf;
++        iov[0].iov_len = mSettings->mBufLen;
++        zm.zm_msg.msg_iov = iov;
++        zm.zm_msg.msg_iovlen = 1;
++        currLen = zcopy_tx( mSettings->mSock, &zm);
+         if ( currLen < 0 ) {
+             WARN_errno( currLen < 0, "write2" );
+             break;
+         }
+	totLen += currLen;
++        pfd[0].fd = zm.zm_txfd;
++        pfd[0].events = POLLOUT;
++        int ret = poll(pfd, 1, -1);
++        if (ret < 0) {
++            perror("poll");
++            exit(1);
++        }
++        zcopy_txclose(&zm);
+
+	if(mSettings->mInterval > 0) {
+	    gettimeofday( &(reportstruct->packetTime), NULL );

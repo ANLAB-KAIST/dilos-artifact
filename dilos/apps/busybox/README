@@ -1,0 +1,13 @@
+Busybox ash shell is more powerful than OSv --runscript option.
+Use ash when fancy shell is required.
+
+While busybox config file includes default options (e.g. nearly all
+options are enabled), the usr.manifest doesn't try to create all
+valid symlinks to busybox binary. Instead, only a few are included.
+
+A small test script is provided (commented out in usr.manifest).
+It can be run as:
+  scripts/run.py -e "sleep 1.2; ash /cmd0.sh; echo Done"
+
+You can also start an interactive shell with:
+  scripts/run.py -e ash

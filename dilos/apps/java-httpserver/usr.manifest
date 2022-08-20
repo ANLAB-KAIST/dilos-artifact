@@ -1,0 +1,2 @@
+/java-httpserver/HttpServerApp.class: ${MODULE_DIR}/HttpServerApp.class
+/java-httpserver/HttpServerApp$1.class: ${MODULE_DIR}/HttpServerApp$1.class

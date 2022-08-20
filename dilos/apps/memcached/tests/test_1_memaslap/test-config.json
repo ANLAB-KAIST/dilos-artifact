@@ -1,0 +1,9 @@
+{
+  "tester" : {
+     "memaslap" : {
+        "threads" : "3",
+        "concurrency" : "120",
+        "duration" : "60s"
+     }
+  }
+}

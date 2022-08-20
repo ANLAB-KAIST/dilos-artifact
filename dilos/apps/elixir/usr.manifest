@@ -1,0 +1,2 @@
+/usr/local/lib/elixir/**: ${MODULE_DIR}/ROOTFS/usr/local/lib/elixir/**
+/etc/default/elixir/**: ${MODULE_DIR}/default/**

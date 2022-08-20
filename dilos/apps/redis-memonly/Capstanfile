@@ -1,0 +1,6 @@
+base: cloudius/osv-base
+cmdline: /redis-server redis.conf
+build: make
+files:
+    /redis-server: redis-server
+    /redis.conf: redis.conf

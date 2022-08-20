@@ -1,0 +1,19 @@
+#!/bin/sh -e
+
+rm -rf dpdk ROOTFS
+git clone -b osv-head --depth 1 https://github.com/syuu1228/dpdk.git
+cd dpdk
+make install T=x86_64-native-osvapp-gcc OSV_SDK=`readlink -f ../../..`
+(cd examples/cmdline; env RTE_SDK=`readlink -f ../../` RTE_TARGET=x86_64-native-osvapp-gcc make)
+(cd examples/helloworld; env RTE_SDK=`readlink -f ../../` RTE_TARGET=x86_64-native-osvapp-gcc make)
+(cd examples/ip_fragmentation; env RTE_SDK=`readlink -f ../../` RTE_TARGET=x86_64-native-osvapp-gcc make)
+(cd examples/l2fwd; env RTE_SDK=`readlink -f ../../` RTE_TARGET=x86_64-native-osvapp-gcc make)
+(cd examples/l3fwd; env RTE_SDK=`readlink -f ../../` RTE_TARGET=x86_64-native-osvapp-gcc make)
+cd ..
+mkdir -p ROOTFS
+find dpdk/x86_64-native-osvapp-gcc/app/ -executable -readable -type f -exec cp -v {} ROOTFS/ \;
+find dpdk/x86_64-native-osvapp-gcc/lib/ -readable -name "*.so*" -exec cp -v {} ROOTFS/ \;
+find dpdk/examples/*/build/app -executable -readable -type f -exec cp -v {} ROOTFS/ \;
+for i in ROOTFS/*
+do echo /${i#ROOTFS/}: \${MODULE_DIR}/$i
+done > usr.manifest

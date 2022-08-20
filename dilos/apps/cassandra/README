@@ -1,0 +1,11 @@
++ How to test cassandra
+
+$ sudo scripts/run.py -nv
+$ cd osv/apps/cassandra/upstream/apache-cassandra-*/bin
+$ ./cassandra-stress -d 192.168.122.89 -o INSERT
+$ ./cassandra-stress -d 192.168.122.89 -o READ
+
++ See more about the test results and options:
+http://www.datastax.com/documentation/cassandra/1.2/cassandra/tools/toolsCStress_t.html
+http://www.datastax.com/documentation/cassandra/1.2/cassandra/tools/toolsCStressOptions_r.html
+http://www.datastax.com/documentation/cassandra/1.2/cassandra/tools/toolsCStressOutput_c.html

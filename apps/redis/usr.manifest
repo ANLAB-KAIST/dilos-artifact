@@ -1,0 +1,3 @@
+/redis-server: ${MODULE_DIR}/redis/src/redis-server
+/redis.conf: ${MODULE_DIR}/redis.conf
+/libprefetch_redis.so: ${MODULE_DIR}/../../build/prefetcher/redis/libprefetch_redis.so

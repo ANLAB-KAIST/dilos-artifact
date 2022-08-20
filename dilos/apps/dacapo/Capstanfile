@@ -1,0 +1,28 @@
+# Copyright (C) 2014 Cloudius Systems, Ltd.
+#
+# This work is open source software, licensed under the terms of the
+# BSD license as described in the LICENSE file in the top-level directory.
+
+base: cloudius/osv-openjdk
+
+cmdline: >
+  /java.so -jar /dacapo.jar
+  avrora
+  batik
+  eclipse
+  fop
+  h2
+  jython
+  luindex
+  lusearch
+  pmd
+  sunflow
+  tomcat
+  tradebeans
+  tradesoap
+  xalan
+
+build: ./GET
+
+files:
+  /dacapo.jar: dacapo-9.12-bach.jar

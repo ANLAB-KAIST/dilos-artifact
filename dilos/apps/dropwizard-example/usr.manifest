@@ -1,0 +1,4 @@
+/dropwizard-example.jar: ${MODULE_DIR}/dropwizard/dropwizard-example/target/dropwizard-example-0.8.0-rc3-SNAPSHOT.jar
+/example.mv.db: ${MODULE_DIR}/dropwizard/dropwizard-example/target/example.mv.db
+/example.yml: ${MODULE_DIR}/dropwizard/dropwizard-example/example.yml
+/example.keystore: ${MODULE_DIR}/dropwizard/dropwizard-example/example.keystore

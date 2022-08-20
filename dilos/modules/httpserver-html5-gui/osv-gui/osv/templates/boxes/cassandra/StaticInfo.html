@@ -1,0 +1,27 @@
+<div class="roundedContainer smallGraph col-lg-6">
+    <table class="table">
+      <tr> 
+        <td>Live Nodes</td>
+        <td>
+          <ul>
+          {{#each liveNodes}}
+            <li>{{this}}</li>
+          {{/each}}
+          </ul>
+        </td>      
+      </tr>
+      <tr>
+        <td>Load Map</td>
+        <td>
+          <table class="table table-striped">
+            {{#each loadMap}}
+            <tr>
+              <td>{{@key}}</td>
+              <td>{{this}}</td>
+            </tr>
+            {{/each}}
+          </table>
+        </td>
+      </tr>
+    </table>
+</div>

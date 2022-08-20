@@ -1,0 +1,8 @@
+{{#each this}}
+<div style="height:20px;">&nbsp;</div>
+<div style="background: {{#if background}}{{background}}{{else}}#CCCCCC{{/if}}; color: white; text-align: center">{{label}}</div>
+<div style="text-align: -webkit-center;">
+    <div style="font-size: 20px; display: table-cell;">{{value}}</div>
+    <div style="font-size: 12px; display: table-cell;">{{unit}}</div>
+</div>
+{{/each}}

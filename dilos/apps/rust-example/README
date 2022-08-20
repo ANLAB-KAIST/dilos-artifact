@@ -1,0 +1,6 @@
+In order to build this simple "Hello World!" app you need to install
+Rust tool chain (compiler + cargo) by following instructions here:
+https://www.rust-lang.org/en-US/install.html.
+
+./scripts/build image=rust-example
+./scripts/run.py

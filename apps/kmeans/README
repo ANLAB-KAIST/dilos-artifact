@@ -1,0 +1,22 @@
+This app builds an image containing the already-compiled Python shared
+object for Python 3.x (libpython3.7.so for example) installed on the build machine,
+and some of the required libraries from the build machine.
+
+In order to build this app you need to have Python development package
+installed for your distribution. Examples how to do it:
+sudo apt-get install python3-dev # On Ubuntu
+sudo dnf install python3-devel   # On Fedora
+
+The python home directory is assumed to be installed under
+<sys.prefix>/lib/python<sys.version_info.major>.<sys.version_info.minor>/
+where sys is Python package this script reads the sys.* values from.
+
+Please note that any extra modules found under site-packages or dist-packages
+directories are filtered out from the image. You can add extra modules by editing
+the PYTHON_MODULES variable in the GET script.
+
+Example usage:
+
+./scripts/run.py -e "/python3"
+./scripts/run.py --api -e "/python3 -c \"aa={1:22,3:44}; print(aa); print('asdf')\""
+./scripts/run.py --api -e "/python3 -m http.server 8000"

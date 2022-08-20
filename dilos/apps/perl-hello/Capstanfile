@@ -1,0 +1,9 @@
+base: perl-base
+
+cmdline: /osv/bin/perl hello.pl
+
+#no build - just uploading hello.pl
+build: true
+
+files:
+    /hello.pl: hello.pl

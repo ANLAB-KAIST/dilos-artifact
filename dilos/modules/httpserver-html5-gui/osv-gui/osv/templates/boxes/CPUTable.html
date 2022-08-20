@@ -1,0 +1,17 @@
+<div><div style="height:325px; overflow:auto;" class="smallGraph">
+      <table class="roundedContainer smallGraph table table-striped" style="width:100%;">
+    <thead>
+      <tr>
+        <th>CPU</th>
+        <th>Usage</th>
+      </tr>
+    </thead>
+    {{#each cpus }}
+      <tr> 
+        <td>{{ name }}</td>  
+        <td>{{ usage }}</td>  
+      </tr>
+    {{/each}}
+    </table>
+
+</div></div>

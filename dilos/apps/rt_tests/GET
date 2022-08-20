@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+set -e
+
+mkdir -p upstream
+cd upstream
+
+git clone git://git.kernel.org/pub/scm/linux/kernel/git/clrkwllms/rt-tests.git rt_tests
+
+cd rt_tests
+make NUMA=0 CFLAGS="-fPIC -shared -UNUMA"

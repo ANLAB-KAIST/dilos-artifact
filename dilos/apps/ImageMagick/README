@@ -1,0 +1,10 @@
+This module is an example of using the unmodified ImageMagick libraries
+taken from the build machine.
+
+We compile a trivial "convert" main using the host's ImageMagick libraries,
+and run "convert --help".
+
+On Fedora 21, this seems to work. But on other systems we have seen problems
+with the libgomp (gcc's OpenMP) shared library used by ImageMagick - which
+ends up calling the system call instruction (see OSv issue #590) and is
+compiled with stack protection (see OSv issue #589).

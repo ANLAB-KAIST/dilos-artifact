@@ -1,0 +1,125 @@
+/* config.h.in.  Generated from configure.ac by autoheader.  */
+
+/* Enable CUDA feature */
+#undef CUDA_PATH
+
+/* Enable CUDA feature */
+#undef HAVE_CUDA
+
+/* Define to 1 if you have the <dlfcn.h> header file. */
+#undef HAVE_DLFCN_H
+
+/* Enable endian conversion */
+#undef HAVE_ENDIAN
+
+/* Have EX support */
+#undef HAVE_EX
+
+/* Have Extended ODP support */
+#undef HAVE_EX_ODP
+
+/* Have new post send API support */
+#undef HAVE_IBV_WR_API
+
+/* Define to 1 if you have the <infiniband/verbs.h> header file. */
+#undef HAVE_INFINIBAND_VERBS_H
+
+/* Define to 1 if you have the <inttypes.h> header file. */
+#undef HAVE_INTTYPES_H
+
+/* Enable IPv4 Extended Flow Specification */
+#undef HAVE_IPV4_EXT
+
+/* Enable IPv6 Flow Specification */
+#undef HAVE_IPV6
+
+/* Define to 1 if you have the `ibverbs' library (-libverbs). */
+#undef HAVE_LIBIBVERBS
+
+/* Define to 1 if you have the `rdmacm' library (-lrdmacm). */
+#undef HAVE_LIBRDMACM
+
+/* Define to 1 if you have the <memory.h> header file. */
+#undef HAVE_MEMORY_H
+
+/* Have Out of order data placement support */
+#undef HAVE_OOO_ATTR
+
+/* Have PACKET_PACING support */
+#undef HAVE_PACKET_PACING
+
+/* Enable RAW_ETH_TEST */
+#undef HAVE_RAW_ETH
+
+/* Enable RAW_ETH_TEST_REG */
+#undef HAVE_RAW_ETH_REG
+
+/* Enable Relaxed Ordering */
+#undef HAVE_RO
+
+/* Enable SCIF link Layer */
+#undef HAVE_SCIF
+
+/* Enable Sniffer Flow Specification */
+#undef HAVE_SNIFFER
+
+/* Have SRD support */
+#undef HAVE_SRD
+
+/* Define to 1 if you have the <stdint.h> header file. */
+#undef HAVE_STDINT_H
+
+/* Define to 1 if you have the <stdlib.h> header file. */
+#undef HAVE_STDLIB_H
+
+/* Define to 1 if you have the <strings.h> header file. */
+#undef HAVE_STRINGS_H
+
+/* Define to 1 if you have the <string.h> header file. */
+#undef HAVE_STRING_H
+
+/* Define to 1 if you have the <sys/stat.h> header file. */
+#undef HAVE_SYS_STAT_H
+
+/* Define to 1 if you have the <sys/types.h> header file. */
+#undef HAVE_SYS_TYPES_H
+
+/* Define to 1 if you have the <unistd.h> header file. */
+#undef HAVE_UNISTD_H
+
+/* Enable XRCD feature */
+#undef HAVE_XRCD
+
+/* OS is FreeBSD */
+#undef IS_FREEBSD
+
+/* Define to the sub-directory in which libtool stores uninstalled libraries.
+   */
+#undef LT_OBJDIR
+
+/* Name of package */
+#undef PACKAGE
+
+/* Define to the address where bug reports for this package should be sent. */
+#undef PACKAGE_BUGREPORT
+
+/* Define to the full name of this package. */
+#undef PACKAGE_NAME
+
+/* Define to the full name and version of this package. */
+#undef PACKAGE_STRING
+
+/* Define to the one symbol short name of this package. */
+#undef PACKAGE_TARNAME
+
+/* Define to the home page for this package. */
+#undef PACKAGE_URL
+
+/* Define to the version of this package. */
+#undef PACKAGE_VERSION
+
+/* Define to 1 if you have the ANSI C header files. */
+#undef STDC_HEADERS
+
+/* Version number of package */
+#undef VERSION

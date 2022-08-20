@@ -1,0 +1,60 @@
+#!/usr/bin/env bash
+set -e
+
+BASEDIR=$PWD
+ROOTFS=$BASEDIR/ROOTFS
+
+PYTHON_PREFIX_DIR=`python -c 'import sys; print(sys.prefix)'`
+PYTHON_MAJOR_VERSION=`python -c 'import sys; print(sys.version_info.major)'`
+PYTHON_MINOR_VERSION=`python -c 'import sys; print(sys.version_info.minor)'`
+PYTHON_VERSION="${PYTHON_MAJOR_VERSION}.${PYTHON_MINOR_VERSION}"
+
+install_shlibs() {
+SHLIBS=""
+SHLIBS+=" $ROOTFS/python.so "
+SHLIBS+=" `find $ROOTFS -iname '*\.so' | grep -v '/site-packages/'` "
+set +e
+SHLIBS+=" `find $ROOTFS -iname '*\.so[\.0-9]*' | grep -v '/site-packages/'` "
+set -e
+SHLIBS_COUNT="`echo \"$SHLIBS\" | wc -l`"
+
+ldd $SHLIBS | grep -Po '(?<=> )/[^ ]+' | sort | uniq | grep -Pv 'lib(c|gcc|dl|m|util|rt|pthread|stdc\+\+|selinux|krb5|gssapi_krb5)\.so' | xargs -I {} install  {} $ROOTFS/usr/lib
+# ROOTFS/lib/python2.7/config/libpython2.7.so is a symlink to ../../libpython2.7.so,
+# so create a valid destination to avoid ldd error due to dangling symlink.
+(cd $ROOTFS/lib && ln -sf ../usr/lib/libpython${PYTHON_VERSION}.so.1.0 libpython${PYTHON_VERSION}.so)
+echo "$SHLIBS_COUNT"
+}
+
+main() {
+mkdir -p build/
+gcc -o build/python.so python.c -fPIC -shared -lpython${PYTHON_VERSION}
+
+rm -rf "$ROOTFS"
+mkdir -p "$ROOTFS/usr/lib"
+mkdir -p "$ROOTFS/lib/python${PYTHON_VERSION}"
+
+cp build/python.so "$ROOTFS"
+install_shlibs
+for dir in ${PYTHON_PREFIX_DIR}/lib*/python${PYTHON_VERSION}/
+do
+    rsync -a "$dir" $ROOTFS/lib/python${PYTHON_VERSION}/ --safe-links --exclude test --exclude unittest \
+    --exclude '*.pyc' --exclude '*.pyo' --exclude '*.egg-info' --exclude 'site-packages' --exclude 'dist-packages'
+done
+
+SHLIBS_COUNT4=`install_shlibs`
+echo "Python SHLIBS_COUNT4=$SHLIBS_COUNT4"
+SHLIBS_COUNT3=`install_shlibs`
+echo "Python SHLIBS_COUNT3=$SHLIBS_COUNT3"
+SHLIBS_COUNT2=`install_shlibs`
+echo "Python SHLIBS_COUNT2=$SHLIBS_COUNT2"
+SHLIBS_COUNT1=`install_shlibs`
+echo "Python SHLIBS_COUNT1=$SHLIBS_COUNT1"
+if [ $SHLIBS_COUNT1 -ne $SHLIBS_COUNT2 ]
+then
+	# if this happens, just add additional calls to install_shlibs()
+	echo "ERROR some libraries required by python might be missing"
+	exit 1
+fi
+}
+
+main

@@ -1,0 +1,5 @@
+base: cloudius/osv-base
+cmdline: /sqlite.so test.db
+build: make
+files:
+    /sqlite.so: sqlite.so

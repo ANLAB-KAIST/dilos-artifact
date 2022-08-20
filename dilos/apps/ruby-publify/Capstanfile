@@ -1,0 +1,5 @@
+base: ruby
+
+cmdline: --cwd=/publify/ --env=GEM_HOME=/publify/vendor/bundle/ruby /ruby.so ./bin/rails server
+
+build: make

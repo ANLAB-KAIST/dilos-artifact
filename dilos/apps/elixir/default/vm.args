@@ -1,0 +1,11 @@
+-pa
+/usr/local/lib/elixir/lib/eex/ebin
+/usr/local/lib/elixir/lib/elixir/ebin
+/usr/local/lib/elixir/lib/ex_unit/ebin
+/usr/local/lib/elixir/lib/iex/ebin
+/usr/local/lib/elixir/lib/logger/ebin
+/usr/local/lib/elixir/lib/mix/ebin
+-elixir ansi_enabled true
+-user Elixir.IEx.CLI
+-extra
+--no-halt

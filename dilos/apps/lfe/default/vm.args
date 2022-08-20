@@ -1,0 +1,3 @@
+-pa
+/usr/lib/lfe/ebin
+-user lfe_init

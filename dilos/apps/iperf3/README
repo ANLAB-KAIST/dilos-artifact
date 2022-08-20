@@ -1,0 +1,4 @@
+This is a newer version of iperf version 3.
+
+Please note that this app does not work with ROFS until
+the issue https://github.com/cloudius-systems/osv/issues/1035 is fixed.

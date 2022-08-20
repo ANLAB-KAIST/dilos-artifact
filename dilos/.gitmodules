@@ -1,0 +1,17 @@
+[submodule "external/x64/acpica"]
+	path = external/x64/acpica
+	url = ../../cloudius-systems/acpica
+	ignore = dirty
+[submodule "apps"]
+	path = apps
+	url = ../../cloudius-systems/osv-apps
+	ignore = dirty
+[submodule "modules/httpserver/swagger-ui"]
+	path = modules/httpserver-html5-gui/swagger-ui
+	url = ../../cloudius-systems/swagger-ui.git
+[submodule "musl"]
+	path = musl
+	url = ../../cloudius-systems/musl.git
+[submodule "modules/httpserver/osv-gui"]
+	path = modules/httpserver-html5-gui/osv-gui
+	url = ../../cloudius-systems/osv-gui.git

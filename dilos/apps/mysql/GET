@@ -1,0 +1,48 @@
+#!/bin/sh
+
+VERSION=5.6.45
+BASEDIR=$PWD
+BUILDDIR=$BASEDIR/build
+ROOTDIR=$BASEDIR/install
+SRCDIR=$BASEDIR/mysql-$VERSION
+
+if [ ! -f mysql-$VERSION.tar.gz ]; then
+    wget http://dev.mysql.com/get/Downloads/MySQL-5.6/mysql-$VERSION.tar.gz
+fi
+tar zxf mysql-$VERSION.tar.gz
+
+
+mkdir -p $BUILDDIR
+mkdir -p $ROOTDIR/etc
+
+cd $SRCDIR
+patch -p1 < ../osv.patch
+
+cd $BUILDDIR
+CFLAGS="-fPIC" CXXFLAGS="-fPIC" cmake -DWITH_NUMA=OFF -DCMAKE_INSTALL_PREFIX:PATH=/usr ../mysql-$VERSION
+make -j4
+make install DESTDIR=$ROOTDIR
+
+cd $ROOTDIR
+egrep mysql /etc/services > etc/services
+cp $BASEDIR/my.cnf etc/
+cd usr
+
+./scripts/mysql_install_db --force --basedir=./ --ldata=data
+cat <<EOF | eval './bin/mysqld  --bootstrap --skip-grant-tables --basedir=./ --datadir=data --max_allowed_packet=8M --net_buffer_length=16K'
+use mysql;
+set default_storage_engine=InnoDB;
+insert into user(Host, User, Password, Select_priv, Insert_priv, Update_priv, Delete_priv, Create_priv, Drop_priv, Reload_priv, Shutdown_priv, Process_priv, File_priv, Grant_priv, References_priv, Index_priv, Alter_priv, Show_db_priv, Super_priv, Create_tmp_table_priv, Lock_tables_priv, Execute_priv, Repl_slave_priv, Repl_client_priv, Create_view_priv, Show_view_priv, Create_routine_priv, Alter_routine_priv, Create_user_priv, Event_priv, Trigger_priv, Create_tablespace_priv) values('%', 'admin', password('osv'), 'Y','Y','Y','Y','Y','Y','Y','Y','Y','Y','Y','Y','Y','Y','Y','Y','Y','Y','Y','Y','Y','Y','Y','Y','Y','Y','Y','Y','Y');
+EOF
+
+cd $BUILDDIR/sql
+$(cat CMakeFiles/mysqld.dir/link.txt) -shared
+cd $BASEDIR
+
+echo "
+/etc/**: ${ROOTDIR}/etc/**
+/usr/share/**: ${ROOTDIR}/usr/share/**
+/usr/lib/**: ${ROOTDIR}/usr/lib/**
+/usr/data/**: ${ROOTDIR}/usr/data/**
+/usr/bin/mysqld: ${BUILDDIR}/sql/mysqld
+" > usr.manifest

@@ -1,0 +1,5 @@
+/python3: ->/python.so
+/lib64: ->/lib
+/run.py: ${MODULE_DIR}/run.py
+
+/**: ${MODULE_DIR}/ROOTFS/**

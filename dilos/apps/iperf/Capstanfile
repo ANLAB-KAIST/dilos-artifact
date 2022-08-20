@@ -1,0 +1,5 @@
+base: cloudius/osv-base
+cmdline: /iperf -s
+build: make
+files:
+    /iperf: iperf

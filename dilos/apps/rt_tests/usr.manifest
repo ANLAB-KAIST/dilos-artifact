@@ -1,0 +1,2 @@
+tools/cyclictest.so: ${MODULE_DIR}/upstream/rt_tests/cyclictest
+tools/hackbench.so: ${MODULE_DIR}/upstream/rt_tests/hackbench

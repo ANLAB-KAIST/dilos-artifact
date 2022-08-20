@@ -1,0 +1,3 @@
+#!/bin/sh
+wget https://s3.amazonaws.com/Minecraft.Download/versions/1.7.10/minecraft_server.1.7.10.jar
+java -Xms1024M -Xmx1024M -jar minecraft_server.1.7.10.jar nogui

@@ -1,0 +1,8 @@
+#!/bin/sh
+VERSION=9.1.15.0
+wget https://s3.amazonaws.com/jruby.org/downloads/$VERSION/jruby-complete-$VERSION.jar
+mv jruby-complete-$VERSION.jar jruby-complete.jar
+mkdir gemjar
+java -jar jruby-complete.jar -S gem install -i ./gemjar sinatra --no-rdoc --no-ri
+jar cf jruby-extensions.jar -C ./gemjar .
+rm -rf gemjar

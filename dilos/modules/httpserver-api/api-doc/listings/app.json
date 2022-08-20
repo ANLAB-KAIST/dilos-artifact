@@ -1,0 +1,72 @@
+{
+    "apiVersion": "0.0.1",
+    "swaggerVersion": "1.2",
+    "basePath": "http://{{Host}}",
+    "resourcePath": "/app",
+    "produces": [
+        "application/json",
+        "application/xml"
+    ],
+    "apis": [
+        {
+            "path": "/app/",
+            "operations": [
+                {
+                    "method": "PUT",
+                    "summary": "Start an application",
+                    "notes": "Run an application with its command line parameters. A space separated list of thread IDs is returned - one TID for each started application.",
+                    "type": "string",
+                    "nickname": "run_app",
+                    "produces": [
+                        "application/json",
+                        "application/xml"
+                    ],
+                    "parameters": [
+                        {
+                            "name": "command",
+                            "description": "command with its parameters",
+                            "required": true,
+                            "allowMultiple":false,
+                            "type":"string",
+                            "paramType":"query"
+                        },
+                        {
+                            "name":"new_program",
+                            "description":"Should be application started in new ELF namespace, to have separate copies of libraries (global data variables)",
+                            "required":false,
+                            "allowMultiple":false,
+                            "type":"boolean",
+                            "paramType":"query"
+                       }
+                    ]
+                }
+            ]
+        },
+        {
+            "path": "/app/finished",
+            "operations": [
+                {
+                    "method": "GET",
+                    "summary": "Check if application terminated",
+                    "notes": "Check if application specified by thread ID tid finished. Invalid tid is reported as finished.",
+                    "type": "string",
+                    "nickname": "finished_app",
+                    "produces": [
+                        "application/json",
+                        "application/xml"
+                    ],
+                    "parameters": [
+                        {
+                            "name": "tid",
+                            "description": "application main thread ID",
+                            "required": true,
+                            "allowMultiple":false,
+                            "type":"string",
+                            "paramType":"query"
+                       }
+                    ]
+                }
+            ]
+        }
+    ]
+}

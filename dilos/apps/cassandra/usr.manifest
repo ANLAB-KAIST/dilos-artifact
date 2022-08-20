@@ -1,0 +1,2 @@
+/usr/cassandra/lib/**: ${MODULE_DIR}/ROOTFS/usr/cassandra/lib/**
+/usr/cassandra/conf/**: ${MODULE_DIR}/ROOTFS/usr/cassandra/conf/**

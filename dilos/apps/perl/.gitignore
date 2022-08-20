@@ -1,0 +1,16 @@
+ROOTFS*
+.vimlist
+perl
+experiments
+osvbuild.sh
+/xx*
+/yy*
+/zz*
+/foo*
+/junk*
+~*
+*.swp
+*.tar.bz2
+/toc.*
+/tmp
+*.out

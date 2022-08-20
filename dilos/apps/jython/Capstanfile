@@ -1,0 +1,9 @@
+base: cloudius/osv-openjdk
+
+cmdline: >
+  /java.so -jar jython.jar -m SimpleHTTPServer 8888
+
+build: make module
+
+files:
+ /jython.jar: jython.jar

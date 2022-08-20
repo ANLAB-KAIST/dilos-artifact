@@ -1,0 +1,39 @@
+diff --git a/Makefile b/Makefile
+index 344ff29..7164508 100644
+--- a/Makefile
++++ b/Makefile
+@@ -20,7 +20,7 @@ include build_config.mk
+ CFLAGS += -I. -I./include $(PLATFORM_CCFLAGS) $(OPT)
+ CXXFLAGS += -I. -I./include $(PLATFORM_CXXFLAGS) $(OPT)
+ 
+-LDFLAGS += $(PLATFORM_LDFLAGS)
++LDFLAGS += $(PLATFORM_LDFLAGS) -shared
+ LIBS += $(PLATFORM_LIBS)
+ 
+ LIBOBJECTS = $(SOURCES:.cc=.o)
+@@ -211,4 +211,7 @@ else
+ 
+ .c.o:
+ 	$(CC) $(CFLAGS) -c $< -o $@
++
++%.o: %.cc
++	$(CC) $(CFLAGS) -c $< -o $@
+ endif
+diff --git a/build_detect_platform b/build_detect_platform
+index 6e59c6f..dd21ffe 100755
+--- a/build_detect_platform
++++ b/build_detect_platform
+@@ -55,9 +55,9 @@ fi
+ 
+ COMMON_FLAGS=
+ CROSS_COMPILE=
+-PLATFORM_CCFLAGS=
+-PLATFORM_CXXFLAGS=
+-PLATFORM_LDFLAGS=
++PLATFORM_CCFLAGS="-fPIC"
++PLATFORM_CXXFLAGS="-fPIC"
++PLATFORM_LDFLAGS="-shared"
+ PLATFORM_LIBS=
+ PLATFORM_SHARED_EXT="so"
+ PLATFORM_SHARED_LDFLAGS="-shared -Wl,-soname -Wl,"
+ 

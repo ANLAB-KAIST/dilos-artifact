@@ -1,0 +1,21 @@
+#!/bin/sh
+
+# Build a directory from the upstream redis 
+set -e
+
+VERSION=3.2.8
+mkdir upstream
+cd upstream
+wget -c https://github.com/antirez/redis/archive/$VERSION.tar.gz
+tar xf $VERSION.tar.gz
+cd redis-$VERSION
+patch -p0 -N < ../../patch
+# TODO: The top-level make's "-r" option breaks redis's inner makefiles.
+# MAKEFLAGS should probably have been unset before calling us, not here.
+unset MAKEFLAGS ARCH
+make CFLAGS="-fPIC" LDFLAGS="-shared" MALLOC=libc
+cp src/redis-server ../..
+cd ../..
+pwd
+echo "/redis-server: ${PWD}/upstream/redis-$VERSION/src/redis-server" > usr.manifest
+echo "/redis.conf: ${PWD}/redis.conf" >> usr.manifest

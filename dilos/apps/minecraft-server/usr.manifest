@@ -1,0 +1,11 @@
+/banned-ips.json: ${MODULE_DIR}/banned-ips.json
+/banned-players.json: ${MODULE_DIR}/banned-players.json
+/eula.txt: ${MODULE_DIR}/eula.txt
+/logs/**: ${MODULE_DIR}/logs/**
+/minecraft_server.1.7.10.jar: ${MODULE_DIR}/minecraft_server.1.7.10.jar
+/ops.json: ${MODULE_DIR}/ops.json
+/server.properties: ${MODULE_DIR}/server.properties
+/usercache.json: ${MODULE_DIR}/usercache.json
+/whitelist.json: ${MODULE_DIR}/whitelist.json
+/world/**: ${MODULE_DIR}/world/**
+/usr/lib/jvm/java/jre/lib/security/cacerts: /etc/ssl/certs/java/cacerts

@@ -1,0 +1,28 @@
+{
+    "apiVersion": "0.0.1",
+    "swaggerVersion": "1.2",
+    "basePath": "{{Protocol}}://{{Host}}",
+    "resourcePath": "/plugin",
+    "produces": [
+        "application/json"
+    ],
+    "apis": [
+        {
+            "path": "/plugin/hello",
+            "operations": [
+                {
+                    "method": "GET",
+                    "summary": "Test API",
+                    "type": "string",
+                    "nickname": "plugin_hello",
+                    "produces": [
+                        "application/json"
+                    ],
+                    "parameters": [
+                    ],
+                    "deprecated": "false"
+                }
+            ]
+        }
+    ]
+}

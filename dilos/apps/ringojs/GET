@@ -1,0 +1,4 @@
+#!/bin/sh
+wget -c http://ringojs.org/downloads/ringojs-0.10.tar.gz
+tar -xpf ringojs-0.10.tar.gz
+mv ringojs-0.10 ROOTFS

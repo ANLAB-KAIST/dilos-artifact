@@ -1,0 +1,68 @@
+#!/bin/sh
+
+# Build a directory from the upstream rpm
+set -e
+VERSION=4.11
+MINOR=2
+PKG=rpm
+BUILD=${PWD}/upstream/build
+
+BIN=""
+genlib()
+{
+    ldd $BIN | grep lib$1.so | sed 's/ *[^ ] *\(.*\) => \(.*\) .*/\/\1: \2/'
+}
+
+mkdir upstream
+cd upstream
+mkdir build
+wget http://rpm.org/releases/$PKG-$VERSION.x/$PKG-$VERSION.$MINOR.tar.bz2
+tar xjvf $PKG-$VERSION.$MINOR.tar.bz2
+cd $PKG-$VERSION.$MINOR
+wget http://download.oracle.com/berkeley-db/db-4.5.20.tar.gz
+tar xzf db-4.5.20.tar.gz
+ln -s db-4.5.20 db
+patch -p1 < ../../nomakedev.patch # way simpler this way
+
+#FIXME
+./configure CFLAGS="-I/usr/include/beecrypt" CPPFLAGS="-I/usr/include/beecrypt" \
+  --prefix=/usr \
+  --with-beecrypt    \
+  --without-archive     \
+  --without-hackingdocs \
+  --without-selinux     \
+  --without-cap         \
+  --without-acl         \
+  --without-lua         \
+  --without-dmalloc     \
+  --with-vendor="OSv"   \
+  --disable-nls         \
+  --disable-python      \
+  --disable-plugins     \
+  --with-pic
+
+make LDFLAGS="-pie" # strangely, "-shared" does not produce a shared library. It has something to do with libtool's rebuild
+make install DESTDIR=${BUILD}
+cd ..
+cd ..
+echo "
+/tools/rpm.so: ${BUILD}/../../rpm.so
+/usr/bin/rpmdb: ${BUILD}/usr/bin/rpmdb
+/usr/lib/rpm/**: ${BUILD}/usr/lib/rpm/**
+/usr/lib/librpmsign.so: ${BUILD}/usr/lib64/librpmsign.so.1.2.1
+/usr/lib/librpmbuild.so: ${BUILD}/usr/lib64/librpmbuild.so.3.2.1
+/usr/lib/librpm.so.3: ${BUILD}/usr/lib64/librpm.so.3.2.1
+/usr/lib/librpmio.so.3: ${BUILD}/usr/lib64/librpmio.so.3.2.1
+" > usr.manifest
+
+export BIN=${BUILD}/bin/rpm
+genlib bz2 >> usr.manifest
+genlib elf >> usr.manifest
+genlib lzma >> usr.manifest
+genlib popt >> usr.manifest
+genlib plc4 >> usr.manifest
+genlib plds4 >> usr.manifest
+genlib nspr4 >> usr.manifest
+genlib z >> usr.manifest
+genlib nspr4 >> usr.manifest
+genlib beecrypt >> usr.manifest

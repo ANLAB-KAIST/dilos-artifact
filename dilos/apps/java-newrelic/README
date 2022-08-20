@@ -1,0 +1,29 @@
+## NewRelic Java client
+Here is how to add a newrelic agent to your Java application
+[tomcat is used as an example]
+
+build an image, adding java-newrelic to the image:
+```
+make image=tomcat,java-newrelic
+```
+
+go back to /app/java-newrelic, and update newrelic.yml
+In particular you MUST update: 
+* the following line using your newrelic licence
+
+*license_key: '<%= license_key %>'*
+* and the following line with your application name 
+
+*app_name: My Application*
+
+build again
+```
+make image=tomcat,java-newrelic
+```
+
+and run you app locally
+```
+sudo ./scripts/run.py -n
+```
+or upload it to the cloud.
+You should see your application metric one you log into your newrelic account.

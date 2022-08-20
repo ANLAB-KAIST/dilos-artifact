@@ -1,0 +1,30 @@
+1) How to prepare the db:
+
+cat > mysql.txt << EOF
+drop database if exists hello_world;
+create database hello_world;
+use hello_world;
+drop table if exists World;
+CREATE TABLE World ( id int primary key auto_increment, randomNumber
+int);
+EOF
+
+for i in `seq 1 10000`;do
+    echo "insert into World (randomNumber) values (123456);"  >> mysql.txt
+done
+
+mysql -uroot -p -h your_db_ip < mysql.txt
+
+2) How to modify the user/password and ip for your db.
+Edit context.xml, it will be injected into osv image.
+
+3) How to test
+
+* simple json test
+curl http://osv_ip:8081/servlet/json
+
+* db query test
+curl http://osv_ip:8081/servlet/db
+
+* db update test
+curl http://osv_ip:8081/servlet/update

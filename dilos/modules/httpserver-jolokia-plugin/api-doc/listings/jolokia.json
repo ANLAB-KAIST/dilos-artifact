@@ -1,0 +1,83 @@
+{
+    "apiVersion": "0.0.1",
+    "swaggerVersion": "1.2",
+    "basePath": "http://{{Host}}",
+    "resourcePath": "/jolokia",
+    "produces": [
+        "application/json"
+    ],
+    "apis": [
+        {
+            "path": "/jolokia/{query}",
+            "operations": [
+                {
+                    "method": "GET",
+                    "summary": "Jolokia GET request",
+                    "notes" : "Query JVM MBean infomration. Example query: read/java.lang:type=Memory/HeapMemoryUsage/used",
+                    "type": "string",
+                    "nickname": "getJolokia",
+                    "produces": [
+                        "application/json"
+                    ],
+                    "parameters": [
+                        {
+                            "name": "query",
+                            "description": "Jolokia query string",
+                            "required": true,
+                            "allowMultiple": true,
+                            "type": "string",
+                            "paramType": "path"
+                        }
+                    ],
+                    "deprecated": "false"
+                }
+            ]
+        },
+        {
+            "path": "/jolokia",
+            "operations": [
+                {
+                    "method": "GET",
+                    "summary": "Jolokia GET request (Alt)",
+                    "notes": "Query JVM MBean infomration. Example query: read/java.lang:type=Memory/HeapMemoryUsage/used",
+                    "type": "string",
+                    "nickname": "getJolokiaAlt",
+                    "produces": [
+                        "application/json"
+                    ],
+                    "parameters": [
+                        {
+                            "name": "p",
+                            "description": "Jolokia alternate query string",
+                            "required": false,
+                            "allowMultiple": false,
+                            "type": "string",
+                            "paramType": "query"
+                        }
+                    ],
+                    "deprecated": "false"
+                },
+                {
+                    "method": "POST",
+                    "summary": "Jolokia POST request",
+                    "notes": "Query JVM MBean infomration. More <a href=\"http://www.jolokia.org/reference/html/protocol.html\">here</a>",
+                    "type": "string",
+                    "nickname": "postJolokia",
+                    "produces": [
+                        "application/json"
+                    ],
+                    "parameters": [
+                        {
+                            "name": "body",
+                            "description": "Jolokia query",
+                            "required": true,
+                            "type": "string",
+                            "paramType": "body"
+                        }
+                    ],
+                    "deprecated": "false"
+                }
+            ]
+        }
+    ]
+}

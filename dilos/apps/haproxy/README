@@ -1,0 +1,12 @@
+Start OSv by:
+
+$ sudo ./scripts/run.py  -nv
+
+On Host:
+
+$ ssh 192.168.122.89
+$ links http://192.168.122.89
+
+Note:
+By default, traffic to guest(192.168.122.89) port 80(http) and 22(ssh) are
+routed to host(192.168.122.1) port 80 and 22. See haproxy.cfg.

@@ -1,0 +1,31 @@
+#!/bin/sh
+
+set -e
+
+BASEDIR=$PWD
+BUILDDIR=$BASEDIR/build
+ROOTDIR=$BASEDIR/install
+GROONGA_VER="5.0.4"
+
+if [ ! -f groonga-*.tar.gz ]; then
+	wget http://packages.groonga.org/source/groonga/groonga-${GROONGA_VER}.tar.gz
+	tar zxf groonga-${GROONGA_VER}.tar.gz
+fi
+
+SRCDIR=`echo $BASEDIR/groonga-${GROONGA_VER}`
+mkdir -p $BUILDDIR
+
+cd $BUILDDIR
+CFLAGS="-fpie" CXXFLAGS="-fpie" CPPFLAGS=-fpie LDFLAGS=-pie $SRCDIR/configure --enable-shared --prefix=$ROOTDIR --srcdir=$SRCDIR
+make
+make install
+cd $BASEDIR
+
+find . -name "*.so" |  xargs -I {} ldd {} | grep -Po '(?<=> )/[^ ]+' | sort | uniq | grep -Pv 'lib(c|dl|m|util|rt|pthread|z|groonga.*).so' | xargs -I {} install  {} install/lib
+
+echo "
+/usr/etc/**: ${ROOTDIR}/etc/**
+/usr/share/**: ${ROOTDIR}/share/**
+/usr/lib/**: ${ROOTDIR}/lib/**
+/usr/bin/groonga: ${ROOTDIR}/bin/groonga
+" > usr.manifest

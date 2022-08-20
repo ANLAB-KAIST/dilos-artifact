@@ -1,0 +1,7 @@
+<div class="checkbox thread" data-thread-name="{{name}}">
+  <label style="z-index:2; position:relative;" class="toggleThread {{#if selected}}checked{{/if}}" data-thread data-thread-id="{{id}}">
+      <div class="{{#if selected}}un{{/if}}select"></div> <span class="">{{ name }} - {{ id }} - <span class="cpuUsage">{{ percent }}</span></span>
+  </label>
+  <div class="bar" style="position:absolute; z-index:1; width:{{ percent }}%; height:calc(100% + 20px); background:#C6E6F5; left:0; top:-10px"></div>
+</div>
+<hr style="margin:0px"/>

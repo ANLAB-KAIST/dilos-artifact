@@ -1,0 +1,1 @@
+/usr/lib/hello.lua: ${MODULE_DIR}/hello.lua

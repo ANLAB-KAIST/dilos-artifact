@@ -1,0 +1,10 @@
+{
+    "apiVersion": "0.0.1",
+    "swaggerVersion": "1.2",
+    "apis": [
+	{
+	    "path": "/../listings/plugin.json",
+            "description": "Test API"
+        }
+    ]
+}

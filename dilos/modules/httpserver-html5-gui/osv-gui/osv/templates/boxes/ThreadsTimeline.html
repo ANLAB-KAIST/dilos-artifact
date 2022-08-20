@@ -1,0 +1,30 @@
+<div>
+<div class="row">
+                                    <hr>
+                                </div>
+  <table class="table table-striped threadsTimeline" >
+    <th></th>
+    {{#each timeline}}
+    <th style="font-size:11px">{{this}}</th>
+    {{/each}}
+  <thead>
+  </thead>
+  {{#each this }}
+    <tr> 
+      <td>{{ name }} <span class="status {{status}}">{{status}}</span></td>  
+      {{#each statusTimeline}}
+      <td>
+         <div class="status {{status}}"></div>
+      </td>
+      {{/each}}
+    </tr>
+  {{/each}}
+  </table>
+
+  <div class="colorMap">
+    <div class="status waiting"></div> <span>Waiting</span>
+    <div class="status running"></div> <span>Running</span>
+    <div class="status queued"></div> <span>Queued</span>
+  </div>
+  
+</div>

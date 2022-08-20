@@ -1,0 +1,8 @@
+[package]
+name = "httpserver"
+version = "0.1.0"
+authors = ["Waldemar Kozaczuk <jwkozaczuk@gmail.com>"]
+
+[dependencies]
+futures = "0.1.14"
+hyper = "0.11.2"

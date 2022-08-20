@@ -1,0 +1,3 @@
+/embulk.jar: ${MODULE_DIR}/ROOTFS/embulk.jar
+/config.yml: ${MODULE_DIR}/ROOTFS/config.yml
+/try1/**: ${MODULE_DIR}/ROOTFS/try1/**

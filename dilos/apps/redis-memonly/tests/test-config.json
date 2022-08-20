@@ -1,0 +1,8 @@
+{
+  "tester" : {
+     "ip" : "$$tester.ip"
+  },
+  "sut" : {
+     "ip" : "$$sut.ip"
+  }
+}

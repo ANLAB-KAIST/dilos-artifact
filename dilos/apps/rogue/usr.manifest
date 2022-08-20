@@ -1,0 +1,2 @@
+/usr/games/rogue: ${MODULE_DIR}/upstream/rogue5.4.4/rogue
+/usr/share/terminfo/u/unknown: ${MODULE_DIR}/upstream/fixed-terminfo/u/unknown

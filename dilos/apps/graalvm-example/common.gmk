@@ -1,0 +1,19 @@
+#
+# Copyright (C) 2019 Waldemar Kozaczuk
+#
+# This work is open source software, licensed under the terms of the
+# BSD license as described in the LICENSE file in the top-level directory.
+#
+
+GRAAL_VERSION=19.3.0
+
+src = $(shell readlink -f ../..)
+app-dir = $(src)/apps/graalvm-example
+
+$(app-dir)/upstream/graalvm-ce-java11-$(GRAAL_VERSION):
+	mkdir -p $(app-dir)/upstream
+	wget -c -O $(app-dir)/upstream/graalvm-ce-java11-linux-amd64-$(GRAAL_VERSION).tar.gz https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-$(GRAAL_VERSION)/graalvm-ce-java11-linux-amd64-$(GRAAL_VERSION).tar.gz
+	cd $(app-dir)/upstream && tar xf graalvm-ce-java11-linux-amd64-$(GRAAL_VERSION).tar.gz
+
+$(app-dir)/upstream/graalvm-ce-java11-$(GRAAL_VERSION)/bin/native-image: upstream/graalvm-ce-java11-$(GRAAL_VERSION)
+	cd $(app-dir)/upstream/graalvm-ce-java11-$(GRAAL_VERSION) && ./bin/gu install native-image && touch ./bin/native-image

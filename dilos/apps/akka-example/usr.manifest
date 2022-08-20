@@ -1,0 +1,1 @@
+/akka-example.jar: ${OSV_BASE}/apps/akka-example/target/akka-example-1.0-SNAPSHOT-jar-with-dependencies.jar

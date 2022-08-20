@@ -1,0 +1,17 @@
+<div class="roundedContainer smallGraph col-lg-6">
+    <div class="row graph_header">
+        <div class="col-xs-11">
+            <h4>{{ title }}</h4>
+        </div>
+        <div class="col-xs-1 confGraph disabled"><a><span class="glyphicon glyphicon-cog"></span></a></div>
+    </div>
+    <div class="graphBorder"></div>
+    <div class="jqplot" width="399" style="display:inline-block; width:399px; height:250px; float:left"></div>
+    <div class="sideTextContainer graphBodyRight col-xs-3" style="height:257px;"></div>
+	<div class="colorMap" style=" margin-top:5px; height:20px">
+	{{#each settings.series}}
+    	<div class="status" style="background: {{color}};"></div> <span>{{label}}</span>
+	{{/each}}
+	</div>
+</div>
+

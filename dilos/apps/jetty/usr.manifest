@@ -1,0 +1,7 @@
+/jetty/start.jar: ${MODULE_DIR}/upstream/start.jar
+/jetty/start.ini: ${MODULE_DIR}/upstream/start.ini
+/jetty/demo-base/**: ${MODULE_DIR}/upstream/demo-base/**
+/jetty/lib/**: ${MODULE_DIR}/upstream/lib/**
+/jetty/etc/**: ${MODULE_DIR}/upstream/etc/**
+/jetty/modules/**: ${MODULE_DIR}/upstream/modules/**
+/etc/**: ${MODULE_DIR}/upstream/demo-base/etc/**

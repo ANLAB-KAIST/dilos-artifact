@@ -1,0 +1,6 @@
+base: cloudius/osv-base
+
+cmdline: /osv/bin/perl -V
+
+#this will build the installation image under ./ROOTFS, which is automatically copied to the VM disk image by capstan:
+build: make install

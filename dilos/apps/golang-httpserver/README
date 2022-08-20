@@ -1,0 +1,13 @@
+This is an example of simple HTTP server implemented in Golang.
+The app listens on port 8000.
+
+In order to build the app you need to install Golang.
+
+./scripts/build image=golang-httpserver
+./scripts/run.py --forward tcp:8000::8000
+
+You can open it in a browser by typing this URL:
+http://localhost:8000/
+
+or hit from command line using curl:
+curl http://localhost:8000/

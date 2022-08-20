@@ -1,0 +1,10 @@
+base: perl-base
+
+cmdline: >
+    --env=PATH=/osv/bin:/cado/bin/cmn
+    --env=PERL_LIBPATH=/cado/lib/cmn
+    /osv/bin/perl
+    /cado/bin/cmn/cado -V
+
+#this will build the installation image under ./ROOTFS, which is automatically copied to the VM disk image by capstan:
+build: make install

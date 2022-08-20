@@ -1,0 +1,43 @@
+#!/bin/bash
+
+set -e
+
+URL=https://github.com/mirror/busybox
+VERSION_GIT=1_27_2
+VERSION_LIB=`echo $VERSION_GIT | sed 's/_/./g'`
+
+[ ! -d build ] && mkdir build
+cd build
+if [ ! -d busybox ]
+then
+  git clone --branch $VERSION_GIT --depth 1 $URL
+  (cd busybox && git am ../../patches/000[0-9]-*\.patch)
+fi
+cd busybox
+
+cp -f ../../patches/config .config
+make -j4
+(cd 0_lib/ && ln -sf libbusybox.so.${VERSION_LIB} libbusybox.so)
+gcc -o busybox-main.so ../../patches/busybox-main.c -L0_lib -lbusybox -shared -fPIC
+cd ../..
+
+cat <<EOF > usr.manifest
+/usr/lib/libbusybox.so.${VERSION_LIB}: \${MODULE_DIR}/build/busybox/0_lib/libbusybox.so.${VERSION_LIB}_unstripped
+/usr/lib/busybox: \${MODULE_DIR}/build/busybox/busybox-main.so
+/usr/lib/ash: ->/usr/lib/busybox
+#
+# common utilities
+/usr/lib/df: ->/usr/lib/busybox
+/usr/lib/sleep: ->/usr/lib/busybox
+/usr/lib/ls: ->/usr/lib/busybox
+/usr/lib/cat: ->/usr/lib/busybox
+/usr/lib/echo: ->/usr/lib/busybox
+/usr/lib/ping: ->/usr/lib/busybox
+#
+# Link /usr/bin (in ash's default PATH) to /usr/lib where we put the executables
+/usr/bin: ->/usr/lib
+#
+# test scripts
+## /**: \${MODULE_DIR}/test-script/**
+
+EOF

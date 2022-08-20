@@ -1,0 +1,1 @@
+provides = ['java','java8']

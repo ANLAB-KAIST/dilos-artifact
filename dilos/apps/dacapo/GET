@@ -1,0 +1,3 @@
+#!/bin/sh
+
+wget -c http://sourceforge.net/projects/dacapobench/files/9.12-bach/dacapo-9.12-bach.jar

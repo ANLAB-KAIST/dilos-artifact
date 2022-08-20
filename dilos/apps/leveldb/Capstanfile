@@ -1,0 +1,3 @@
+base: cloudius/osv-base
+cmdline: db_bench.so
+build: make

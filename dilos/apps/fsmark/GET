@@ -1,0 +1,16 @@
+#!/bin/sh
+
+# Build a directory from the upstream fsmark.
+set -e
+VERSION=3.3
+
+mkdir upstream
+cd upstream
+wget -c http://sourceforge.net/projects/fsmark/files/fsmark/$VERSION/fs_mark-$VERSION.tar.gz
+tar zxvf fs_mark-$VERSION.tar.gz
+mv ./fs_mark-$VERSION ./fs_mark
+
+cd fs_mark
+patch -p1 < ../../fsmark-osv.patch
+cd ..
+cd ..

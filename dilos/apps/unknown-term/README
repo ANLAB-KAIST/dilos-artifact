@@ -1,0 +1,16 @@
+This package provides terminfo definition for the "unknown" terminal type,
+which is ncurses's default if TERM is missing.
+
+Currently, we copy the host's "xterm" definition, as that is a fairly
+common terminal nowadays and will "probably" work for a user with a modern
+Linux terminal, although perhaps we should choose a more bare-bones VT100
+definition instead.
+
+However, QEMU has a long-standing (11 years!) bug which wrongly translates
+a bare linefeed sent by the guest \n\r - see
+    https://bugs.launchpad.net/qemu/+bug/1407813
+    https://bugs.launchpad.net/qemu/+bug/1715296
+
+So we need to modify the host's terminfo files use to avoid using \n for
+moving the cursor directly down - because in qemu it doesn't (the extra
+\r causes the cursor to move to the *beginning* of that line).

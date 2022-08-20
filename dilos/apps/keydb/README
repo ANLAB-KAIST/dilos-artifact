@@ -1,0 +1,3 @@
+KeyDB - A Multithreaded Fork of Redis https://keydb.dev.
+
+Claims to handle twice as many queries per second as Redis, with 60% lower latency.

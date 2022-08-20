@@ -1,0 +1,30 @@
+<div class="graphBodyRight col-xs-5">
+
+    <button type="button" class="btn btn-default clearAll">Remove All</button>
+
+
+    <div class="rightBoxCheckElements" style="overflow:auto">
+
+
+        <input type="text" id="filterTracepoints" class="form-control" placeholder="Search...">
+ 
+        <div class="selectedTracepoints">
+
+        </div>
+
+        <hr style="border: solid 2px gray;"/>
+        <div class="traceList">
+          {{#each this}}
+            <div data-tracepoint-name="{{@key}}" data-add-trace>
+                <div class="checkbox">
+                    <label>
+                        <div class="select"></div> {{@key}}
+                    </label>
+                </div>
+                <hr style="margin:0px"/>
+            </div>
+          {{/each}}
+        </div>
+    </div>
+</div>
+</div>

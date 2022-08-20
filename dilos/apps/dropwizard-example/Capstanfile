@@ -1,0 +1,32 @@
+# Copyright (C) 2014 Cloudius Systems, Ltd.
+#
+# This work is open source software, licensed under the terms of the
+# BSD license as described in the LICENSE file in the top-level directory.
+
+#
+# Name of the base image.  Capstan will download this automatically from
+# Cloudius S3 repository.
+#
+base: cloudius/osv-openjdk
+
+#
+# The command line passed to OSv to start up the application.
+#
+cmdline: >
+  /java.so
+  -jar /dropwizard-example.jar server example.yml
+
+#
+# The command to use to build the application.  In this example, we just use
+# "mvn package".
+#
+build: echo "build"
+
+#
+# List of files that are included in the generated image.
+#
+files:
+  /dropwizard-example.jar: dropwizard/dropwizard-example/target/dropwizard-example-0.8.0-rc3-SNAPSHOT.jar
+  /example.mv.db: dropwizard/dropwizard-example/target/example.mv.db
+  /example.yml: dropwizard/dropwizard-example/example.yml
+  /example.keystore: dropwizard/dropwizard-example/example.keystore

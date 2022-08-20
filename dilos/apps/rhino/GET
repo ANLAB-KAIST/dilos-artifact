@@ -1,0 +1,3 @@
+#!/bin/sh
+wget ftp://ftp.mozilla.org/pub/mozilla.org/js/rhino1_7R2.zip
+unzip -x rhino1_7R2.zip

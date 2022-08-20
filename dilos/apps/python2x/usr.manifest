@@ -1,0 +1,5 @@
+/python: ->/python.so
+# to remove need for --env=PYTHONPATH=/lib/python2.7/, as _my_ build system has python .py files in /lib64/python2.7/
+/lib64: ->/lib
+
+/**: ${MODULE_DIR}/ROOTFS/**

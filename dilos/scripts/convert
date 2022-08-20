@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+# Script for converting the result of the last image build (of
+# scripts/build) from the qcow2 format to a different format as
+# needed by other hypervisors.
+
+trap 'echo "$0 failed: $BASH_COMMAND" >&2; exit $?' ERR
+
+# We assume "scripts/build" has already been run successfully
+DIR=build/`readlink build/last`
+INPUT=$DIR/usr.img
+if test ! -f $INPUT
+then
+    echo "$INPUT not found. Please build an image with scripts/build first."
+fi
+
+echo "Input image: $INPUT"
+
+QEMU_IMG=${QEMU_IMG:-qemu-img}
+
+
+case $1 in
+"")     echo "Usage: $0 <image-type>" >&2
+        exit 1;;
+vmdk)   OUTPUT=$DIR/osv.vmdk
+        $QEMU_IMG convert -O vmdk $INPUT $OUTPUT
+        echo "Created image: $OUTPUT";;
+vdi)    OUTPUT=$DIR/osv.vdi
+        $QEMU_IMG convert -O vdi $INPUT $OUTPUT
+        echo "Created image: $OUTPUT";;
+raw)    OUTPUT=$DIR/osv.raw
+        $QEMU_IMG convert -O raw $INPUT $OUTPUT
+        echo "Created image: $OUTPUT";;
+qcow2-old)
+        # Classic qcow2 which can work on old versions of qemu which do not
+        # support the improved qcow2 v3.
+        OUTPUT=$DIR/osv.qcow2
+        $QEMU_IMG convert -O qcow2 -o compat=0.10 $INPUT $OUTPUT
+        echo "Created image: $OUTPUT";;
+*)      echo "Unsupported image type '$1'. Supported types: vmdk, vdi, raw, qcow2-old." >&2
+        exit 1;;
+esac

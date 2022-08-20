@@ -1,0 +1,9 @@
+#
+# Copyright (C) 2020 Waldemar Kozaczuk
+#
+# This work is open source software, licensed under the terms of the
+# BSD license as described in the LICENSE file in the top-level directory.
+#
+
+[manifest]
+/usr/share/X11/locale/**: /usr/share/X11/locale/**

@@ -1,0 +1,9 @@
+base: cloudius/osv-openjdk
+
+cmdline: >
+  /java.so -jar erjang.jar
+
+build: ./GET
+
+files:
+ /erjang.jar: erjang.jar

@@ -1,0 +1,47 @@
+#!/bin/bash
+
+set -e
+
+cd "$(dirname "$0")"
+
+if test $# -ne 1
+then
+  echo "usage: $0 <node-version>" 1>&2
+  exit 1
+fi
+
+cd "node-$1"
+
+ed -s node.gyp << EOF
+,s/\(['"]\)executable\1/\1shared_library\1/
+g/'-Wl,--whole-archive/d
+g/'<(node_core_target_name)<(STATIC_LIB_SUFFIX)',/d
+w
+EOF
+
+if [ -f node.gypi ]
+then
+ed -s node.gypi << EOF
+,g/'-Wl,--whole-archive/d
+w
+EOF
+fi
+
+ed -s common.gypi << EOF
+,s/'cflags':.*'-pthread'/&, '-fPIC'/
+w
+EOF
+
+ed -s tools/gyp/pylib/gyp/generator/make.py << EOF
+,s/-Wl,--whole-archive//g
+w
+EOF
+
+TEXT_TO_DETECT_IF_GCC7_PATCH_NEEDED="class HashTable : public HashTableBase"
+TEXT_FOUND=`grep -o "$TEXT_TO_DETECT_IF_GCC7_PATCH_NEEDED" deps/v8/src/objects.h`
+if [ "$TEXT_TO_DETECT_IF_GCC7_PATCH_NEEDED" == "$TEXT_FOUND" ]
+then
+patch -p1 <../gcc7.patch
+else
+echo "Not necessary to patch for GCC 7"
+fi

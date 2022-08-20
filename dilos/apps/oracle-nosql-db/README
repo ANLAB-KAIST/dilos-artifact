@@ -1,0 +1,15 @@
+*) Start the database instace
+$ make image=oracle-nosql-db
+$ sudo sudo scripts/run.py -nv
+
+*) Test it on host
+$ cd kv-3.0.5
+$ javac -cp examples:lib/kvclient.jar examples/hello/HelloBigDataWorld.java
+$ java -cp examples:lib/kvclient.jar hello.HelloBigDataWorld -host 192.168.122.89
+Hello Big Data World!
+
+*) Note
+The -host ip addres can be changed in module.py.
+
+*) For more info
+http://www.oracle.com/technetwork/database/database-technologies/nosqldb/overview/index.html

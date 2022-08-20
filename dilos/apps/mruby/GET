@@ -1,0 +1,14 @@
+#!/bin/sh
+
+mkdir upstream
+cd upstream
+git clone https://github.com/mruby/mruby.git
+cd mruby
+
+cp ../../build_config.rb .
+make
+cd ../..
+
+cc -fPIC -Wall -shared -o mruby.so upstream/mruby/mrbgems/mruby-bin-mruby/tools/mruby/mruby.c upstream/mruby/build/host/lib/libmruby.a -Iupstream/mruby/include
+cc -fPIC -Wall -shared -o mirb.so upstream/mruby/mrbgems/mruby-bin-mirb/tools/mirb/mirb.c upstream/mruby/build/host/lib/libmruby.a -Iupstream/mruby/include
+

@@ -1,0 +1,9 @@
+#!/bin/sh
+set -e
+VERSION=3.0.5
+SRC_DIR=kv-ce-$VERSION
+TARBALL=$SRC_DIR.tar.gz
+
+wget -c http://download.oracle.com/otn-pub/otn_software/nosql-database/$TARBALL
+rm -rf $SRC_DIR
+tar zxf $TARBALL
