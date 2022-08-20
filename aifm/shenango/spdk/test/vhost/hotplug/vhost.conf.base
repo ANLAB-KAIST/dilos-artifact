@@ -1,0 +1,4 @@
+[Global]
+
+[Nvme]
+  HotplugEnable Yes

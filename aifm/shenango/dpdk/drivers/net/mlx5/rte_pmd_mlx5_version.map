@@ -1,0 +1,7 @@
+DPDK_2.2 {
+	local: *;
+
+	global:
+	mlx5_manual_reg_mr;
+	mlx5_manual_dereg_mr;
+};

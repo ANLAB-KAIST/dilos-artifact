@@ -1,0 +1,108 @@
+#!/bin/bash
+LOCAL_SIZE_DEFAULT=$((64 << 10))
+# CONFIG_PATH="./memlimit.txt"
+CONFIG_PATH="/var/lib/lxc/privileged-container/config"
+ROUND_UP_BITS=28
+ROUND_UP_OFFSET=$((1 << ROUND_UP_BITS))
+CONTAINER_NAME="privileged-container" 
+SERVER_PATH="redis-5.0.7/src/redis-server"
+CLIENT_PATH="./redis-benchmark"
+SERVER_IP="10.0.1.236"
+
+TRIAL=10
+KEY_SPACE_SIZE=4000
+SET_NUM=$((KEY_SPACE_SIZE * 5))
+
+set_mem_limit(){
+  _LOCAL_SIZE_IN_MB=$1
+  cp $CONFIG_PATH-backup $CONFIG_PATH
+  echo "lxc.cgroup.memory.limit_in_bytes = ${_LOCAL_SIZE_IN_MB}M" >> $CONFIG_PATH
+  echo "=============================================="
+  echo "Local memory size is: ${_LOCAL_SIZE_IN_MB}M"
+}
+
+lxc-stop -n $CONTAINER_NAME
+
+DATA_IDX=0
+for ((DATA_SIZE=4; DATA_SIZE<=128; DATA_SIZE=DATA_SIZE+DATA_SIZE)); do
+  PEAK_MEM=0
+
+  # reset memory limit to unlimited
+  set_mem_limit $LOCAL_SIZE_DEFAULT
+
+  # run server
+  sudo lxc-start -n $CONTAINER_NAME -d
+  sleep 3
+  sudo lxc-attach -n $CONTAINER_NAME -- $SERVER_PATH --protected-mode no --loglevel verbose --save "" --appendonly no > serverlog_${DATA_SIZE}K.txt 2>&1 &
+  sleep 1
+
+  # populate server
+  echo "Populate server sith ${DATA_SIZE}K sized data by sending $KEY_SPACE_SIZE times of SET to $KEY_SPACE_SIZE sized KEYSPACE."
+  REAL_DATA_SIZE=$((DATA_SIZE << 10))
+  $CLIENT_PATH -h $SERVER_IP -n $KEY_SPACE_SIZE -d -$REAL_DATA_SIZE -t set -r $KEY_SPACE_SIZE --csv
+
+  for ((i=1; i<=$TRIAL; i++)); do
+    # echo "$i-th trial with data_size ${DATA_SIZE}K, $KEY_SPACE_SIZE times GET."
+
+    $CLIENT_PATH -h $SERVER_IP -n $KEY_SPACE_SIZE -d $REAL_DATA_SIZE -t get -r $KEY_SPACE_SIZE --csv
+    sleep 20
+
+    MEM_USAGE=`sudo cat /proc/$(pgrep redis-server)/status | grep VmPeak | awk '/[0-9]/{print $2}'`
+    # echo "Working Memory Set size is $MEM_USAGE KB"
+
+    # round up peak memory usage to the multiply of 256MB
+    MEM_USAGE=$((MEM_USAGE >> (ROUND_UP_BITS - 10)))
+    MEM_USAGE=$((MEM_USAGE << ROUND_UP_BITS))
+    MEM_USAGE=$((MEM_USAGE + ROUND_UP_OFFSET))
+
+    if ((MEM_USAGE > PEAK_MEM)); then
+      PEAK_MEM=$MEM_USAGE
+    fi
+
+    PEAK_MEM_IN_MB=$((PEAK_MEM >> 20))
+
+  done
+  echo "Working Memory Set size is ${PEAK_MEM}B, ${PEAK_MEM_IN_MB}MB"
+
+
+  # kill server
+  sudo lxc-stop -n $CONTAINER_NAME
+
+  LOCAL_SIZE=PEAK_MEM
+
+  for ((j=0; j < 3; j++)); do
+    # halve local memory limit
+    LOCAL_SIZE=$((LOCAL_SIZE >> 1))
+    LOCAL_SIZE_IN_MB=$((LOCAL_SIZE >> 20))
+    
+    set_mem_limit $LOCAL_SIZE_IN_MB
+
+    # run server
+    sudo lxc-start -n $CONTAINER_NAME -d
+    sleep 3
+    sudo lxc-attach -n $CONTAINER_NAME -- $SERVER_PATH --protected-mode no --loglevel verbose --save "" --appendonly no > serverlog_${DATA_SIZE}K.txt 2>&1 &
+    sleep 1
+
+    # populate server
+    echo "Populate server sith ${DATA_SIZE}K sized data by sending $KEY_SPACE_SIZE times of SET to $KEY_SPACE_SIZE sized KEYSPACE."
+    REAL_DATA_SIZE=$((DATA_SIZE << 10))
+    $CLIENT_PATH -h $SERVER_IP -n $KEY_SPACE_SIZE -d -$REAL_DATA_SIZE -t set -r $KEY_SPACE_SIZE --csv
+    # RUN
+
+    for ((i=1; i<=$TRIAL; i++)); do
+      # echo "$i-th trial with data_size ${REAL_DATA_SIZE}K, $KEY_SPACE_SIZE times GET."
+
+      $CLIENT_PATH -h $SERVER_IP -n $KEY_SPACE_SIZE -d $REAL_DATA_SIZE -t get -r $KEY_SPACE_SIZE --csv
+      sleep 20
+    done
+
+    # kill server
+    sudo lxc-stop -n $CONTAINER_NAME
+
+  done
+
+  SET_NUM=$((SET_NUM >> 1))
+  KEY_SPACE_SIZE=$((KEY_SPACE_SIZE >> 1))
+done
+
+

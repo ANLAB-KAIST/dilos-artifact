@@ -1,0 +1,15 @@
+*.o
+*.o.d
+*.mod.o
+*.mod.c
+*.ko
+*.cmd
+*.tmp_versions
+*.pyc
+modules.order
+Module.symvers
+
+*.deb
+*.tar.gz
+*.changes
+*.dsc
