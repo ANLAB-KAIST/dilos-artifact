@@ -32,12 +32,16 @@ cd /root/dilos # 2. Change directory
 
 **WARNING: Takes long time**
 
+Run below on **compute node**.
+
 ```bash
 ./scripts/download-dataset.sh # Download dataset in /mnt
 ./scripts/prepare-disk.sh # Generated disk images contain dataset
 ```
 
 ### 3.2. Build Redis Benchmark Tool
+
+Run below on **compute node**.
 
 ```bash
 ./scripts/prepare-redis.sh # build redis-benchmark
@@ -73,6 +77,8 @@ cd /root/dilos # 2. Change directory
 
 **WARNING: Takes long time**
 
+Run below on **compute node**.
+
 ```bash
 su - # 1. Login to root. All experiement are conduct in root
 cd /root/dilos # 2. Change directory
@@ -82,6 +88,8 @@ cd /root/dilos # 2. Change directory
 ### 5.2. **Figure 7(b)**: K-Means
 
 **WARNING: Takes long time**
+
+Run below on **compute node**.
 
 ```bash
 su - # 1. Login to root. All experiement are conduct in root
@@ -93,6 +101,8 @@ cd /root/dilos # 2. Change directory
 
 **WARNING: Takes long time**
 
+Run below on **compute node**.
+
 ```bash
 su - # 1. Login to root. All experiement are conduct in root
 cd /root/dilos # 2. Change directory
@@ -102,6 +112,8 @@ cd /root/dilos # 2. Change directory
 ### 5.5. **Figure 8**: Dataframe
 
 **WARNING: Takes long time**
+
+Run below on **compute node**.
 
 ```bash
 su - # 1. Login to root. All experiement are conduct in root
@@ -113,6 +125,8 @@ cd /root/dilos # 2. Change directory
 
 **WARNING: Takes long time**
 
+Run below on **compute node**.
+
 ```bash
 su - # 1. Login to root. All experiement are conduct in root
 cd /root/dilos # 2. Change directory
@@ -123,6 +137,8 @@ cd /root/dilos # 2. Change directory
 
 **WARNING: Takes long time**
 
+Run below on **compute node**.
+
 ```bash
 su - # 1. Login to root. All experiement are conduct in root
 cd /root/dilos # 2. Change directory
@@ -132,6 +148,8 @@ cd /root/dilos # 2. Change directory
 ### 5.7. **Figure 12**: Redis (Bandwidth)
 
 **WARNING: Takes long time**
+
+Run below on **compute node**.
 
 ```bash
 su - # 1. Login to root. All experiement are conduct in root
