@@ -5,6 +5,7 @@ today=$(date +%F_%H-%d-%S)
 
 run-remote() {
     ssh $MS_IP "$@"
+	sleep 2
 }
 
 update() {
