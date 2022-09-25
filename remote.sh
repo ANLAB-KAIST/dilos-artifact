@@ -32,7 +32,7 @@ down() {
 }
 
 case $1 in
-update | build | setup | up | down)
+update | build | setup | up | down | clean)
     $1
     ;;
 *)
