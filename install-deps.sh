@@ -17,7 +17,7 @@ apt install -y python3-pip build-essential gdb bridge-utils numactl \
 apt install -y libboost-all-dev
 apt install -y unzip liblua5.3-dev lua5.3 libssl-dev pax-utils libyaml-cpp-dev \
     openjdk-11-jdk-headless libedit-dev libglib2.0-dev libfdt-dev libpixman-1-dev \
-    zlib1g-dev libaio-dev libsysfs-dev hugepages net-tools python3-numpy
+    zlib1g-dev libaio-dev libsysfs-dev hugepages net-tools python3-decorator python3-numpy python3-joblib python3-sklearn
 
 pip3 install -U pip wheel
 pip3 install ninja meson cmake
