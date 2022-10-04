@@ -19,5 +19,9 @@ apt install -y unzip liblua5.3-dev lua5.3 libssl-dev pax-utils libyaml-cpp-dev \
     openjdk-11-jdk-headless libedit-dev libglib2.0-dev libfdt-dev libpixman-1-dev \
     zlib1g-dev libaio-dev libsysfs-dev hugepages net-tools python3-decorator python3-numpy python3-joblib python3-sklearn
 
+apt install -y software-properties-common
+add-apt-repository -y ppa:ubuntu-toolchain-r/test
+apt-get install -y gcc-9 g++-9
+
 pip3 install -U pip wheel
 pip3 install ninja meson cmake
