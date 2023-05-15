@@ -1,5 +1,10 @@
 # DiLOS - Artifact
 
+Paper: [https://wsyo.one/dilos](https://wsyo.one/dilos)  
+Slides: [https://wsyo.one/dilos/slides](https://wsyo.one/dilos/slides)
+
+
+
 **Note: EagleOS is an anonymized code name of DiLOS**
 
 ## 1. Software Setup Instruction
